@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOENK API — 全球 AI 基础设施平台 | DeepSeek 专精</title>
+<meta name="description" content="50+ AI 模型，全球低延迟，企业级安全。DeepSeek、GPT、Claude、Gemini、Qwen、GLM 一站式接入。注册送 50 万 tokens。">
+<style>
+:root { --bg:#0a0a0f; --surface:#13131a; --border:#1e1e2e; --text:#e2e2f0; --text-dim:#8888a0; --accent:#6c5ce7; --accent-glow:rgba(108,92,231,0.15); --green:#00d2a0; --radius:12px; }
+* { margin:0;padding:0;box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif; line-height:1.7; }
+nav { position:fixed;top:0;width:100%;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100; }
+nav .inner { max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between; }
+nav .logo { font-size:1.25em;font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px; }
+nav .logo span { color:var(--accent); }
+nav .links { display:flex;gap:28px; }
+nav .links a { color:var(--text-dim);text-decoration:none;font-size:.9em;transition:color .2s; }
+nav .links a:hover { color:var(--text); }
+nav .lang a { color:var(--text-dim);text-decoration:none;font-size:.85em;margin-left:12px; }
+nav .lang a.active { color:var(--accent); }
+.btn { padding:8px 18px;border-radius:8px;font-size:.875em;font-weight:500;text-decoration:none;display:inline-block;transition:all .2s; }
+.btn-ghost { background:transparent;color:var(--text);border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--text-dim); }
+.btn-primary { background:var(--accent);color:#fff; }
+.btn-primary:hover { background:#7c6ff0;transform:translateY(-1px);box-shadow:0 4px 24px var(--accent-glow); }
+.hero { padding:140px 24px 80px;text-align:center;max-width:900px;margin:0 auto; }
+.hero .badge { display:inline-block;padding:6px 16px;background:var(--accent-glow);border:1px solid rgba(108,92,231,0.2);border-radius:20px;font-size:.8em;color:var(--accent);margin-bottom:24px; }
+.hero h1 { font-size:3em;font-weight:800;letter-spacing:-0.03em;line-height:1.2;margin-bottom:16px; }
+.hero h1 span { background:linear-gradient(135deg,var(--accent),#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.hero .sub { font-size:1.15em;color:var(--text-dim);max-width:600px;margin:0 auto 32px; }
+.hero .cta { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
+.hero .code-block { margin-top:40px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;text-align:left;font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:.8em;color:var(--text-dim);overflow-x:auto;max-width:620px;margin-left:auto;margin-right:auto; }
+.hero .code-block .c { color:#555;font-style:italic; }
+.hero .code-block .k { color:var(--accent); }
+.hero .code-block .s { color:var(--green); }
+.stats { display:flex;justify-content:center;gap:48px;padding:40px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);flex-wrap:wrap; }
+.stat { text-align:center; }
+.stat-num { font-size:1.75em;font-weight:700;color:var(--accent); }
+.stat-label { font-size:.8em;color:var(--text-dim);margin-top:4px; }
+section { padding:80px 24px; }
+.section-inner { max-width:1200px;margin:0 auto; }
+.section-label { font-size:.75em;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin-bottom:12px; }
+.section-title { font-size:2em;font-weight:700;margin-bottom:12px; }
+.section-desc { color:var(--text-dim);max-width:600px;margin-bottom:40px; }
+.grid-3 { display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px; }
+.card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:border-color .3s; }
+.card:hover { border-color:var(--accent); }
+.card .icon { font-size:1.5em;margin-bottom:12px; }
+.card h3 { font-size:1.1em;margin-bottom:8px; }
+.card p { color:var(--text-dim);font-size:.9em; }
+.steps { display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;text-align:center; }
+.step { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px 20px; }
+.step-num { width:40px;height:40px;background:var(--accent);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1em;margin-bottom:16px; }
+.step h3 { margin-bottom:8px; }
+.step p { color:var(--text-dim);font-size:.85em; }
+.pricing-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px; }
+.pricing-card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center; }
+.pricing-card.featured { border-color:var(--accent);box-shadow:0 0 40px var(--accent-glow); }
+.pricing-card .tier { font-size:.8em;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-bottom:8px; }
+.pricing-card .price { font-size:2.5em;font-weight:800;margin-bottom:4px; }
+.pricing-card .price span { font-size:.4em;color:var(--text-dim);font-weight:400; }
+.pricing-card .desc { color:var(--text-dim);font-size:.85em;margin-bottom:20px; }
+.pricing-card ul { list-style:none;text-align:left;margin-bottom:24px; }
+.pricing-card li { padding:6px 0;font-size:.85em;border-bottom:1px solid rgba(255,255,255,0.03); }
+.pricing-card li::before { content:'✓ ';color:var(--green); }
+.model-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px; }
+.model-card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px; }
+.model-card .name { font-weight:600;font-size:1.05em;margin-bottom:4px; }
+.model-card .tagline { color:var(--text-dim);font-size:.8em;margin-bottom:12px; }
+.model-card .price-row { display:flex;justify-content:space-between;font-size:.85em; }
+.model-card .price-row span { color:var(--green);font-weight:600; }
+.cta-section { text-align:center;background:var(--surface); }
+footer { border-top:1px solid var(--border);padding:40px 24px; }
+.footer-inner { max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px; }
+footer h4 { font-size:.8em;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;color:var(--text-dim); }
+footer a { display:block;color:var(--text-dim);text-decoration:none;font-size:.85em;padding:3px 0; }
+footer a:hover { color:var(--text); }
+footer .bottom { max-width:1200px;margin:32px auto 0;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;color:var(--text-dim);font-size:.8em;flex-wrap:wrap;gap:12px; }
+@media(max-width:768px) { nav .links{display:none;} .hero h1{font-size:2em;} .stats{gap:24px;} .stat-num{font-size:1.3em;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/zh/" class="logo">&#x26A1; <span>TOENK</span> API</a>
+    <div class="links">
+      <a href="/zh/models">模型</a>
+      <a href="/zh/pricing">定价</a>
+      <a href="/docs">文档</a>
+      <a href="/security">安全</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="lang"><a href="/" style="color:var(--text-dim);text-decoration:none;">EN</a> <a href="/zh/" class="active">中文</a></span>
+      <a href="/sign-in" class="btn btn-ghost">登录</a>
+      <a href="/sign-up" class="btn btn-primary">免费注册</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">&#x26A1; 全球化运营 · 50+ 模型接入</div>
+  <h1>连接<span>中国 AI</span>与<br>全球开发者的基础设施</h1>
+  <p class="sub">DeepSeek 专精 · GPT/Claude/Gemini/Qwen/GLM 一站式接入。国内 BGP 极速，全球 4 区域部署，企业级安全合规。</p>
+  <div class="cta">
+    <a href="/sign-up" class="btn btn-primary" style="padding:14px 32px;font-size:1em;">免费开始 — 送 50 万 tokens</a>
+    <a href="/docs" class="btn btn-ghost" style="padding:14px 32px;font-size:1em;">查看文档</a>
+  </div>
+  <div class="code-block">
+<span class="c"># 一行代码切换，兼容 OpenAI SDK</span>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+client = OpenAI(
+    base_url=<span class="s">"https://api.toenk-api.com/v1"</span>,
+    api_key=<span class="s">"sk-toenk-xxxxxxxx"</span>
+)
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">50+</div><div class="stat-label">接入模型</div></div>
+  <div class="stat"><div class="stat-num">¥0.5</div><div class="stat-label">每百万 tokens 起</div></div>
+  <div class="stat"><div class="stat-num">99.97%</div><div class="stat-label">可用率</div></div>
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">全球区域</div></div>
+  <div class="stat"><div class="stat-num">50万</div><div class="stat-label">免费 tokens</div></div>
+</div>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">三步接入</div>
+    <div class="section-title">3 分钟上线你的 AI 应用</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>注册账号</h3><p>免费注册，自动获赠 50 万 tokens。无需信用卡。</p></div>
+      <div class="step"><div class="step-num">2</div><h3>创建 Key</h3><p>控制台一键生成 API Key，设置额度与 IP 白名单。</p></div>
+      <div class="step"><div class="step-num">3</div><h3>一行切换</h3><p>替换 base_url，现有代码零改动，立即开始调用。</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface);">
+  <div class="section-inner">
+    <div class="section-label">为什么选择 TOENK</div>
+    <div class="section-title">不只是 API 代理</div>
+    <div class="grid-3">
+      <div class="card"><div class="icon">🚀</div><h3>比官方更快</h3><p>国内 BGP 加速 + 全球 4 区域节点。DeepSeek 延迟降低 48%，GPT/Claude 国内直连可用。</p></div>
+      <div class="card"><div class="icon">🛡️</div><h3>企业级安全</h3><p>内置内容安全过滤、数据脱敏、审计日志。等保 2.0 合规报告一键导出。</p></div>
+      <div class="card"><div class="icon">💰</div><h3>智能省钱</h3><p>上下文感知路由自动选最优模型。简单对话用 Flash，复杂推理用 Pro。平均节省 40-60%。</p></div>
+      <div class="card"><div class="icon">🌏</div><h3>中西双向桥</h3><p>海外用户轻松接入 DeepSeek/Qwen/GLM，国内企业合规使用 GPT/Claude/Gemini。</p></div>
+      <div class="card"><div class="icon">🤖</div><h3>Agent 托管</h3><p>一键部署 LangChain/Dify Agent。内置知识库、RAG、工作流编排。</p></div>
+      <div class="card"><div class="icon">📊</div><h3>实时分析</h3><p>按模型/Key/时间维度的用量分析。消费预警，省钱建议，异常检测。</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">精选模型</div>
+    <div class="section-title">26+ 模型，覆盖全部场景</div>
+    <div class="model-grid">
+      <div class="model-card"><div class="name">⭐ deepseek-v4-flash</div><div class="tagline">日常对话 · 代码生成 · 文档处理</div><div class="price-row"><span>¥0.5/1M</span> 输入</div></div>
+      <div class="model-card"><div class="name">⭐ deepseek-v4-pro</div><div class="tagline">复杂推理 · 数学证明 · 高级架构</div><div class="price-row"><span>¥2.0/1M</span> 输入</div></div>
+      <div class="model-card"><div class="name">deepseek-chat</div><div class="tagline">通用对话 · 翻译 · 摘要</div><div class="price-row"><span>¥1.0/1M</span> 输入</div></div>
+      <div class="model-card"><div class="name">deepseek-reasoner</div><div class="tagline">数学竞赛 · 逻辑推理</div><div class="price-row"><span>¥4.0/1M</span> 输入</div></div>
+      <div class="model-card"><div class="name">qwen3.6-max</div><div class="tagline">旗舰全能 · 128K 超长上下文</div><div class="price-row"><span>¥3.0/1M</span> 输入</div></div>
+      <div class="model-card"><div class="name">glm-5</div><div class="tagline">智谱旗舰 · Agent 能力突出</div><div class="price-row"><span>¥5.0/1M</span> 输入</div></div>
+      <div class="model-card"><div class="name">kimi-k2.6</div><div class="tagline">月之暗面旗舰 · 超长文档分析</div><div class="price-row"><span>¥4.0/1M</span> 输入</div></div>
+      <div class="model-card"><div class="name">gpt-4o</div><div class="tagline">OpenAI 旗舰 · 多模态</div><div class="price-row"><span>按量</span></div></div>
+    </div>
+    <p style="text-align:center;margin-top:24px;"><a href="/zh/models" style="color:var(--accent);text-decoration:none;">查看全部 26+ 模型 →</a></p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="section-inner">
+    <div class="section-title">准备好开始了吗？</div>
+    <p style="color:var(--text-dim);margin-bottom:24px;">注册即送 500,000 tokens。无需信用卡，零门槛体验。</p>
+    <a href="/sign-up" class="btn btn-primary" style="padding:16px 40px;font-size:1.05em;">免费注册 →</a>
+  </div>
+</section>
+
+<!-- Status Bar -->
+<div id="toenk-status" style="text-align:center;padding:10px 24px;font-size:.78em;background:var(--surface);border-top:1px solid var(--border);color:var(--text-dim);">
+  <span id="status-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#555;margin-right:6px;"></span>
+  <span id="status-text">正在检测服务状态...</span>
+  <span style="margin-left:16px;">API 延迟: <span id="status-latency">—</span></span>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><h4>产品</h4><a href="/zh/models">模型广场</a><a href="/zh/pricing">定价</a><a href="/docs">文档</a><a href="/playground">试玩台</a></div>
+    <div><h4>开发者</h4><a href="/docs">API 参考</a><a href="/docs/sdk">SDK</a><a href="/changelog">更新日志</a></div>
+    <div><h4>安全</h4><a href="/security">安全中心</a><a href="/security/compliance">合规</a><a href="/security/whitepaper">白皮书</a></div>
+    <div><h4>关于</h4><a href="/about">关于我们</a><a href="/blog">博客</a><a href="/contact">联系我们</a></div>
+  </div>
+  <div class="bottom">
+    <span>&copy; 2026 TOENK API</span>
+    <span>DeepSeek 专精 · 全球 AI 基础设施</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Status check
+  (function check(){
+    var dot=document.getElementById('status-dot'),txt=document.getElementById('status-text'),lat=document.getElementById('status-latency');
+    if(!dot||!txt)return;
+    var start=Date.now();
+    fetch('/health',{cache:'no-cache'}).then(function(r){
+      var ms=Date.now()-start;
+      if(r.ok){dot.style.background='#00d2a0';txt.textContent='所有服务正常运行';if(lat)lat.textContent=ms+'ms';}
+      else{dot.style.background='#ff6b6b';txt.textContent='服务降级';}
+    }).catch(function(){dot.style.background='#ff6b6b';txt.textContent='无法连接';});
+    setTimeout(check,60000);
+  })();
+})();
+</script>
+
+</body>
+</html>
