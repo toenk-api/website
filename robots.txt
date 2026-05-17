@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://toenk-api.com/sitemap.xml
