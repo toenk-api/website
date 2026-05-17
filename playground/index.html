@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Playground — TOENK API</title>
+<meta name="description" content="Test TOENK API models directly in your browser. No setup required.">
+<style>
+:root { --bg:#0a0a0f; --surface:#13131a; --border:#1e1e2e; --text:#e2e2f0; --text-dim:#8888a0; --accent:#6c5ce7; --green:#00d2a0; --red:#ff6b6b; --radius:12px; }
+* { margin:0;padding:0;box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; line-height:1.6; min-height:100vh; }
+nav { position:fixed;top:0;width:100%;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100; }
+nav .inner { max-width:1400px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between; }
+nav .logo { font-size:1.15em;font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px; }
+nav .logo span { color:var(--accent); }
+.btn { padding:8px 16px;border-radius:8px;font-size:.85em;font-weight:500;text-decoration:none;border:none;cursor:pointer;transition:all .2s; }
+.btn-ghost { background:transparent;color:var(--text);border:1px solid var(--border); }
+.btn-primary { background:var(--accent);color:#fff; }
+.btn-primary:hover { background:#7c6ff0; }
+.btn-sm { padding:5px 12px;font-size:.78em; }
+.main { padding-top:70px;display:flex;height:calc(100vh - 70px); }
+.panel { flex:1;display:flex;flex-direction:column;min-width:0; }
+.panel-header { padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap; }
+.panel-body { flex:1;overflow-y:auto;padding:16px 20px; }
+.panel-left { border-right:1px solid var(--border);max-width:500px; }
+select,input,textarea { background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:8px 12px;font-size:.85em;font-family:inherit; }
+select:focus,input:focus,textarea:focus { outline:none;border-color:var(--accent); }
+textarea { width:100%;min-height:120px;resize:vertical;font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:.8em;line-height:1.5; }
+.response-box { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-family:'SF Mono','Fira Code',Consolas,monospace;font-size:.8em;line-height:1.6;white-space:pre-wrap;word-break:break-word;min-height:200px; }
+.response-box.streaming { border-color:var(--accent); }
+.meta { display:flex;gap:16px;flex-wrap:wrap;font-size:.78em;color:var(--text-dim);margin-top:12px; }
+.meta span { display:flex;align-items:center;gap:4px; }
+.status-ok { color:var(--green); }
+.status-err { color:var(--red); }
+.system-row { display:flex;align-items:center;gap:8px;margin-bottom:8px; }
+.system-row label { font-size:.8em;color:var(--text-dim);white-space:nowrap; }
+.system-row input { flex:1; }
+.param-row { display:flex;gap:12px;align-items:center;margin-bottom:12px; }
+.param-row label { font-size:.8em;color:var(--text-dim);white-space:nowrap;min-width:80px; }
+.param-row input,.param-row select { width:100px; }
+#status-bar { text-align:center;padding:8px;font-size:.75em;background:var(--surface);border-top:1px solid var(--border);color:var(--text-dim); }
+@media(max-width:768px){ .main{flex-direction:column;height:auto;} .panel-left{max-width:100%;border-right:none;border-bottom:1px solid var(--border);} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="logo">&#x26A1; <span>TOENK</span> API <span style="color:var(--text-dim);font-weight:400;">Playground</span></a>
+    <div>
+      <a href="/docs" class="btn btn-ghost btn-sm">Docs</a>
+      <a href="/sign-up" class="btn btn-primary btn-sm">Get API Key</a>
+    </div>
+  </div>
+</nav>
+
+<div class="main">
+  <!-- Left: Request Panel -->
+  <div class="panel panel-left">
+    <div class="panel-header">
+      <select id="model-select" style="flex:1;">
+        <option value="deepseek-v4-flash" selected>deepseek-v4-flash</option>
+        <option value="deepseek-v4-pro">deepseek-v4-pro</option>
+        <option value="deepseek-reasoner">deepseek-reasoner</option>
+        <option value="deepseek-chat">deepseek-chat</option>
+        <option value="gpt-4o">gpt-4o</option>
+        <option value="claude-sonnet-4.6">claude-sonnet-4.6</option>
+        <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+        <option value="qwen3.6-max">qwen3.6-max</option>
+        <option value="glm-5">glm-5</option>
+      </select>
+    </div>
+    <div class="panel-body">
+      <div class="system-row">
+        <label>System:</label>
+        <input type="text" id="system-msg" placeholder="You are a helpful assistant." style="flex:1;">
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:.8em;color:var(--text-dim);display:block;margin-bottom:4px;">User Message:</label>
+        <textarea id="user-msg" placeholder="Type your message here...">Hello! Introduce yourself in one sentence.</textarea>
+      </div>
+      <div class="param-row">
+        <label>Temperature:</label>
+        <input type="number" id="temperature" value="0.7" min="0" max="2" step="0.1">
+        <label>Max Tokens:</label>
+        <input type="number" id="max-tokens" value="1024" min="1" max="8192">
+      </div>
+      <button class="btn btn-primary" onclick="sendRequest()" id="send-btn" style="width:100%;padding:12px;">Send Request</button>
+      <div style="margin-top:8px;font-size:.75em;color:var(--text-dim);">
+        <label><input type="checkbox" id="stream-mode" checked> Stream response</label>
+      </div>
+      <div style="margin-top:16px;font-size:.75em;color:var(--text-dim);">
+        <p>No API key? This demo uses a shared sandbox key. <a href="/sign-up" style="color:var(--accent);">Get your own key</a> for production use.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Response Panel -->
+  <div class="panel">
+    <div class="panel-header">
+      <span style="font-weight:600;">Response</span>
+      <span id="resp-status" style="font-size:.8em;color:var(--text-dim);margin-left:auto;"></span>
+    </div>
+    <div class="panel-body">
+      <div class="response-box" id="response-box">Click <strong>Send Request</strong> to test the API.</div>
+      <div class="meta" id="response-meta" style="display:none;">
+        <span>⏱ <span id="meta-latency">—</span>ms</span>
+        <span>📥 <span id="meta-tokens-in">—</span> in</span>
+        <span>📤 <span id="meta-tokens-out">—</span> out</span>
+        <span>💰 <span id="meta-cost">—</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="status-bar">
+  <span id="status-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#555;margin-right:4px;"></span>
+  <span id="status-text">Checking...</span>
+</div>
+
+<script>
+// Model pricing (static fallback, updated by live fetch)
+var PRICES = {
+  'deepseek-v4-flash': {in:0.07,out:0.28},
+  'deepseek-v4-pro': {in:0.28,out:1.12},
+  'deepseek-reasoner': {in:0.55,out:2.20},
+  'deepseek-chat': {in:0.14,out:0.28},
+  'gpt-4o': {in:2.50,out:10.00},
+  'claude-sonnet-4.6': {in:3.00,out:15.00},
+  'gemini-2.5-flash': {in:0.07,out:0.56},
+  'qwen3.6-max': {in:0.40,out:1.60},
+  'glm-5': {in:0.70,out:2.80}
+};
+
+// Live pricing fetch
+fetch('/v1/models/public',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(data){
+  var models = data.data||data||[];
+  models.forEach(function(m){
+    var p = m.pricing||{};
+    if(p.prompt||p.input) PRICES[m.id] = {in:(p.prompt||p.input)/1000000, out:(p.completion||p.output)/1000000};
+  });
+}).catch(function(){});
+
+// Send API request
+function sendRequest(){
+  var model = document.getElementById('model-select').value;
+  var system = document.getElementById('system-msg').value.trim();
+  var user = document.getElementById('user-msg').value.trim();
+  var temp = parseFloat(document.getElementById('temperature').value)||0.7;
+  var maxTokens = parseInt(document.getElementById('max-tokens').value)||1024;
+  var stream = document.getElementById('stream-mode').checked;
+  var box = document.getElementById('response-box');
+  var sendBtn = document.getElementById('send-btn');
+  var statusEl = document.getElementById('resp-status');
+  var metaEl = document.getElementById('response-meta');
+
+  if(!user){ box.innerHTML='<span style="color:var(--red);">Please enter a message.</span>'; return; }
+
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Sending...';
+  box.innerHTML = stream ? '' : '<span style="color:var(--text-dim);">Waiting for response...</span>';
+  box.classList.add('streaming');
+  statusEl.textContent = '';
+  metaEl.style.display = 'none';
+
+  var messages = [];
+  if(system) messages.push({role:'system',content:system});
+  messages.push({role:'user',content:user});
+
+  var startTime = Date.now();
+
+  fetch('/v1/chat/completions', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:model, messages:messages, temperature:temp, max_tokens:maxTokens, stream:stream})
+  }).then(function(resp){
+    if(!resp.ok) return resp.json().then(function(e){ throw new Error(e.error?.message||'HTTP '+resp.status); });
+    
+    if(stream){
+      var reader = resp.body.getReader();
+      var decoder = new TextDecoder();
+      var fullText = '';
+      var tokensIn = 0, tokensOut = 0;
+      
+      function read(){
+        reader.read().then(function(result){
+          if(result.done){
+            box.classList.remove('streaming');
+            var elapsed = Date.now() - startTime;
+            finishResponse(fullText, elapsed, tokensIn||messages.length*2, tokensOut||fullText.split(' ').length);
+            return;
+          }
+          var chunk = decoder.decode(result.value,{stream:true});
+          var lines = chunk.split('\n');
+          for(var i=0;i<lines.length;i++){
+            var line = lines[i].trim();
+            if(!line.startsWith('data: ')) continue;
+            var data = line.slice(6);
+            if(data==='[DONE]') continue;
+            try {
+              var j = JSON.parse(data);
+              var delta = j.choices&&j.choices[0]&&j.choices[0].delta;
+              if(delta&&delta.content){ fullText += delta.content; box.textContent = fullText; }
+              if(j.usage){ tokensIn = j.usage.prompt_tokens; tokensOut = j.usage.completion_tokens; }
+            } catch(e){}
+          }
+          read();
+        });
+      }
+      read();
+    } else {
+      return resp.json().then(function(data){
+        var elapsed = Date.now() - startTime;
+        var content = data.choices&&data.choices[0]&&data.choices[0].message&&data.choices[0].message.content;
+        var usage = data.usage||{};
+        box.classList.remove('streaming');
+        box.textContent = content||JSON.stringify(data,null,2);
+        finishResponse(content, elapsed, usage.prompt_tokens||0, usage.completion_tokens||0);
+      });
+    }
+  }).catch(function(e){
+    box.classList.remove('streaming');
+    box.innerHTML='<span style="color:var(--red);">Error: '+e.message+'</span>';
+    statusEl.innerHTML='<span class="status-err">Failed</span>';
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send Request';
+  });
+
+  function finishResponse(text, elapsed, ti, to){
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send Request';
+    var elapsed = elapsed||(Date.now()-startTime);
+    statusEl.innerHTML = '<span class="status-ok">✓ '+elapsed+'ms</span>';
+    var p = PRICES[model]||{in:0,out:0};
+    var cost = (ti/1000000*p.in)+(to/1000000*p.out);
+    document.getElementById('meta-latency').textContent = elapsed;
+    document.getElementById('meta-tokens-in').textContent = ti||'—';
+    document.getElementById('meta-tokens-out').textContent = to||'—';
+    document.getElementById('meta-cost').textContent = '$'+cost.toFixed(cost<0.001?6:4);
+    metaEl.style.display = 'flex';
+  }
+}
+
+// Keyboard shortcut
+document.getElementById('user-msg').addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){ e.preventDefault(); sendRequest(); }
+});
+
+// Status check
+(function check(){
+  var dot=document.getElementById('status-dot'),txt=document.getElementById('status-text');
+  if(!dot||!txt)return;
+  fetch('/health',{cache:'no-cache'}).then(function(r){
+    if(r.ok){dot.style.background='#00d2a0';txt.textContent='API operational';}
+    else{dot.style.background='#ff6b6b';txt.textContent='API degraded';}
+  }).catch(function(){dot.style.background='#ff6b6b';txt.textContent='Offline';});
+  setTimeout(check,60000);
+})();
+</script>
+
+</body>
+</html>
