@@ -1,0 +1,113 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "deepseek-chat",
+      "owned_by": "DeepSeek",
+      "pricing": {
+        "prompt": 140000,
+        "completion": 280000
+      },
+      "context_length": 65536
+    },
+    {
+      "id": "deepseek-reasoner",
+      "owned_by": "DeepSeek",
+      "pricing": {
+        "prompt": 550000,
+        "completion": 2200000
+      },
+      "context_length": 65536
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "owned_by": "DeepSeek",
+      "pricing": {
+        "prompt": 70000,
+        "completion": 280000
+      },
+      "context_length": 131072
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "owned_by": "DeepSeek",
+      "pricing": {
+        "prompt": 280000,
+        "completion": 1120000
+      },
+      "context_length": 131072
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "owned_by": "Google",
+      "pricing": {
+        "prompt": 70000,
+        "completion": 560000
+      },
+      "context_length": 1048576
+    },
+    {
+      "id": "gemini-2.5-pro",
+      "owned_by": "Google",
+      "pricing": {
+        "prompt": 180000,
+        "completion": 900000
+      },
+      "context_length": 1048576
+    },
+    {
+      "id": "glm-5",
+      "owned_by": "Zhipu",
+      "pricing": {
+        "prompt": 700000,
+        "completion": 2800000
+      },
+      "context_length": 131072
+    },
+    {
+      "id": "glm-5.1",
+      "owned_by": "Zhipu",
+      "pricing": {
+        "prompt": 700000,
+        "completion": 2800000
+      },
+      "context_length": 131072
+    },
+    {
+      "id": "gpt-4o",
+      "owned_by": "OpenAI",
+      "pricing": {
+        "prompt": 2500000,
+        "completion": 10000000
+      },
+      "context_length": 131072
+    },
+    {
+      "id": "kimi-k2.6",
+      "owned_by": "Moonshot",
+      "pricing": {
+        "prompt": 500000,
+        "completion": 2000000
+      },
+      "context_length": 131072
+    },
+    {
+      "id": "qwen3.6-flash",
+      "owned_by": "Alibaba",
+      "pricing": {
+        "prompt": 70000,
+        "completion": 350000
+      },
+      "context_length": 131072
+    },
+    {
+      "id": "qwen3.6-plus",
+      "owned_by": "Alibaba",
+      "pricing": {
+        "prompt": 400000,
+        "completion": 1600000
+      },
+      "context_length": 131072
+    }
+  ]
+}
