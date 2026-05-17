@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model Catalog — TOENK API</title>
+<meta name="description" content="Compare 50+ AI models. Real-time pricing, context windows, and latency data. DeepSeek, GPT, Claude, Gemini, Qwen, GLM, and more.">
+<link rel="icon" href="/favicon.svg">
+<style>
+:root { --bg:#0a0a0f; --surface:#13131a; --border:#1e1e2e; --text:#e2e2f0; --text-dim:#8888a0; --accent:#6c5ce7; --green:#00d2a0; --radius:12px; }
+* { margin:0;padding:0;box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; line-height:1.6; }
+nav { position:fixed;top:0;width:100%;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100; }
+nav .inner { max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between; }
+nav .logo { font-size:1.25em;font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px; }
+nav .logo span { color:var(--accent); }
+nav .links { display:flex;gap:28px; }
+nav .links a { color:var(--text-dim);text-decoration:none;font-size:.9em; }
+nav .links a:hover,.nav .links a.active { color:var(--text); }
+.btn { padding:8px 18px;border-radius:8px;font-size:.875em;font-weight:500;text-decoration:none; }
+.btn-ghost { background:transparent;color:var(--text);border:1px solid var(--border); }
+.btn-primary { background:var(--accent);color:#fff; }
+section { padding:80px 24px; }
+.inner { max-width:1200px;margin:0 auto; }
+.header { padding-top:120px;text-align:center; }
+.header h1 { font-size:2.2em;font-weight:700; }
+.header p { color:var(--text-dim);margin:8px 0 24px; }
+.filters { display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px; }
+.filters select,.filters input { background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:8px;font-size:.875em; }
+.filters input { min-width:200px; }
+table { width:100%;border-collapse:collapse;font-size:.9em; }
+th { text-align:left;padding:14px 16px;color:var(--text-dim);font-weight:500;border-bottom:1px solid var(--border);font-size:.8em;text-transform:uppercase;letter-spacing:.05em;cursor:pointer; }
+th:hover { color:var(--text); }
+td { padding:16px;border-bottom:1px solid rgba(255,255,255,0.03); }
+tr:hover td { background:rgba(108,92,231,0.03); }
+.model-name { font-weight:600; }
+.model-provider { color:var(--text-dim);font-size:.8em; }
+.tag { display:inline-block;padding:2px 8px;border-radius:4px;font-size:.7em;font-weight:600;margin-right:4px; }
+.tag-chat { background:rgba(0,210,160,0.15);color:var(--green); }
+.tag-code { background:rgba(108,92,231,0.15);color:var(--accent); }
+.tag-reason { background:rgba(255,170,0,0.15);color:#fa0; }
+.tag-vision { background:rgba(0,180,255,0.15);color:#0bf; }
+.price-low { color:var(--green);font-weight:600; }
+.btn-sm { padding:6px 14px;font-size:.8em;border-radius:6px; }
+.compare-bar { position:fixed;bottom:0;width:100%;background:var(--surface);border-top:1px solid var(--accent);padding:16px 24px;display:none;z-index:99; }
+.compare-bar.active { display:flex;align-items:center;justify-content:space-between; }
+@media(max-width:768px){ table{font-size:.75em;} td,th{padding:10px 8px;} .filters{flex-direction:column;align-items:stretch;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="logo">&#x26A1; <span>TOENK</span> API</a>
+    <div class="links">
+      <a href="/models" class="active">Models</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Docs</a>
+      <a href="/security">Security</a>
+      <a href="/blog">Blog</a>
+    </div>
+    <div><a href="/sign-up" class="btn btn-primary">Get Free Tokens</a></div>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="inner">
+    <h1>Model Catalog</h1>
+    <p>50+ models. Real-time pricing. Find the perfect model for your task.</p>
+    <div class="filters">
+      <input type="text" placeholder="Search models..." oninput="filterTable()" id="search">
+      <select onchange="filterTable()" id="provider"><option value="">All Providers</option><option>DeepSeek</option><option>OpenAI</option><option>Anthropic</option><option>Google</option><option>Alibaba</option><option>Zhipu</option><option>Moonshot</option><option>ByteDance</option><option>Baidu</option></select>
+      <select onchange="filterTable()" id="category"><option value="">All Categories</option><option>Chat</option><option>Code</option><option>Reasoning</option><option>Vision</option><option>Embedding</option></select>
+      <select onchange="filterTable()" id="sort"><option value="">Sort: Recommended</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="context-desc">Context: Largest</option></select>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="inner">
+    <table id="modelTable">
+      <thead>
+        <tr><th>Model</th><th>Provider</th><th>Category</th><th>Context</th><th>Input /1M</th><th>Output /1M</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr data-provider="DeepSeek" data-category="Chat Code" data-model="deepseek-v4-flash">
+          <td><div class="model-name">deepseek-v4-flash</div></td>
+          <td><span class="model-provider">DeepSeek</span></td>
+          <td><span class="tag tag-chat">Chat</span><span class="tag tag-code">Code</span></td>
+          <td>128K</td>
+          <td class="price-low">$0.07</td>
+          <td class="price-low">$0.28</td>
+          <td><a href="/playground?model=deepseek-v4-flash" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="DeepSeek" data-category="Reasoning Code" data-model="deepseek-v4-pro">
+          <td><div class="model-name">deepseek-v4-pro</div></td>
+          <td><span class="model-provider">DeepSeek</span></td>
+          <td><span class="tag tag-reason">Reasoning</span><span class="tag tag-code">Code</span></td>
+          <td>128K</td>
+          <td>$0.28</td><td>$1.12</td>
+          <td><a href="/playground?model=deepseek-v4-pro" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="DeepSeek" data-category="Reasoning" data-model="deepseek-reasoner">
+          <td><div class="model-name">deepseek-reasoner</div></td>
+          <td><span class="model-provider">DeepSeek</span></td>
+          <td><span class="tag tag-reason">Reasoning</span></td>
+          <td>64K</td><td>$0.55</td><td>$2.20</td>
+          <td><a href="/playground?model=deepseek-reasoner" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="DeepSeek" data-category="Chat" data-model="deepseek-chat">
+          <td><div class="model-name">deepseek-chat</div></td>
+          <td><span class="model-provider">DeepSeek</span></td>
+          <td><span class="tag tag-chat">Chat</span></td>
+          <td>64K</td><td>$0.14</td><td>$0.28</td>
+          <td><a href="/playground?model=deepseek-chat" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="OpenAI" data-category="Chat Vision Code" data-model="gpt-4o">
+          <td><div class="model-name">gpt-4o</div></td>
+          <td><span class="model-provider">OpenAI</span></td>
+          <td><span class="tag tag-chat">Chat</span><span class="tag tag-vision">Vision</span></td>
+          <td>128K</td><td>$2.50</td><td>$10.00</td>
+          <td><a href="/playground?model=gpt-4o" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="Anthropic" data-category="Chat Code" data-model="claude-sonnet-4.6">
+          <td><div class="model-name">claude-sonnet-4.6</div></td>
+          <td><span class="model-provider">Anthropic</span></td>
+          <td><span class="tag tag-chat">Chat</span><span class="tag tag-code">Code</span></td>
+          <td>1M</td><td>$3.00</td><td>$15.00</td>
+          <td><a href="/playground?model=claude-sonnet-4.6" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="Google" data-category="Chat Vision" data-model="gemini-2.5-flash">
+          <td><div class="model-name">gemini-2.5-flash</div></td>
+          <td><span class="model-provider">Google</span></td>
+          <td><span class="tag tag-chat">Chat</span><span class="tag tag-vision">Vision</span></td>
+          <td>1M</td><td class="price-low">$0.07</td><td>$0.56</td>
+          <td><a href="/playground?model=gemini-2.5-flash" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="Alibaba" data-category="Chat Code" data-model="qwen3.6-max">
+          <td><div class="model-name">qwen3.6-max</div></td>
+          <td><span class="model-provider">Alibaba</span></td>
+          <td><span class="tag tag-chat">Chat</span><span class="tag tag-code">Code</span></td>
+          <td>128K</td><td>$0.40</td><td>$1.60</td>
+          <td><a href="/playground?model=qwen3.6-max" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="Zhipu" data-category="Chat Code" data-model="glm-5">
+          <td><div class="model-name">glm-5</div></td>
+          <td><span class="model-provider">Zhipu</span></td>
+          <td><span class="tag tag-chat">Chat</span><span class="tag tag-code">Code</span></td>
+          <td>128K</td><td>$0.70</td><td>$2.80</td>
+          <td><a href="/playground?model=glm-5" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="Moonshot" data-category="Chat" data-model="kimi-k2.6">
+          <td><div class="model-name">kimi-k2.6</div></td>
+          <td><span class="model-provider">Moonshot</span></td>
+          <td><span class="tag tag-chat">Chat</span></td>
+          <td>128K</td><td>$0.50</td><td>$2.00</td>
+          <td><a href="/playground?model=kimi-k2.6" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="ByteDance" data-category="Chat" data-model="doubao-1.5-pro-256k">
+          <td><div class="model-name">doubao-1.5-pro-256k</div></td>
+          <td><span class="model-provider">ByteDance</span></td>
+          <td><span class="tag tag-chat">Chat</span></td>
+          <td>256K</td><td>$0.35</td><td>$1.40</td>
+          <td><a href="/playground?model=doubao-1.5-pro-256k" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="Baidu" data-category="Chat" data-model="ernie-4.0-turbo">
+          <td><div class="model-name">ernie-4.0-turbo</div></td>
+          <td><span class="model-provider">Baidu</span></td>
+          <td><span class="tag tag-chat">Chat</span></td>
+          <td>8K</td><td>$0.60</td><td>$2.40</td>
+          <td><a href="/playground?model=ernie-4.0-turbo" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+        <tr data-provider="" data-category="Embedding" data-model="text-embedding-v3">
+          <td><div class="model-name">text-embedding-v3</div></td>
+          <td><span class="model-provider">—</span></td>
+          <td><span class="tag tag-code">Embedding</span></td>
+          <td>8K</td><td class="price-low">$0.01</td><td>—</td>
+          <td><a href="/playground?model=text-embedding-v3" class="btn btn-ghost btn-sm">Try</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div id="toenk-status" style="text-align:center;padding:10px 24px;font-size:.78em;background:var(--surface);border-top:1px solid var(--border);color:var(--text-dim);">
+  <span id="status-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#555;margin-right:6px;"></span>
+  <span id="status-text">Checking services...</span>
+  <span style="margin-left:16px;" id="price-updated"></span>
+</div>
+
+<script>
+// === Filter ===
+function filterTable() {
+  var s=(document.getElementById('search').value||'').toLowerCase();
+  var p=document.getElementById('provider').value;
+  var c=document.getElementById('category').value;
+  document.querySelectorAll('#modelTable tbody tr').forEach(function(r){
+    var ok=(!s||r.textContent.toLowerCase().indexOf(s)>=0)&&(!p||r.dataset.provider===p)&&(!c||(r.dataset.category||'').indexOf(c)>=0);
+    r.style.display=ok?'':'none';
+  });
+}
+document.getElementById('search').addEventListener('input',filterTable);
+document.getElementById('provider').addEventListener('change',filterTable);
+document.getElementById('category').addEventListener('change',filterTable);
+
+// === Live Pricing (auto-refresh from API) ===
+(function loadPrices(){
+  fetch('/v1/models/public',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(data){
+    var models=data.data||data||[];
+    models.forEach(function(m){
+      var row=document.querySelector('[data-model="'+m.id+'"]');
+      if(row){
+        var cells=row.querySelectorAll('td');
+        var p=m.pricing||{};
+        var inp=(p.prompt||p.input||0)/1000000;
+        var out=(p.completion||p.output||0)/1000000;
+        if(cells[4])cells[4].textContent='$'+inp.toFixed(inp<0.01?4:2);
+        if(cells[5])cells[5].textContent='$'+out.toFixed(out<0.01?4:2);
+      }
+    });
+    // Update timestamp
+    var ts=document.getElementById('price-updated');
+    if(ts)ts.textContent='Prices updated: '+(new Date()).toLocaleTimeString();
+  }).catch(function(){}); // Silently fall back to static prices
+})();
+
+// === Status Bar ===
+(function check(){
+  var dot=document.getElementById('status-dot'),txt=document.getElementById('status-text');
+  if(!dot||!txt)return;
+  var start=Date.now();
+  fetch('/health',{cache:'no-cache'}).then(function(r){
+    if(r.ok){dot.style.background='#00d2a0';txt.textContent='All services operational ('+(Date.now()-start)+'ms)';}
+    else{dot.style.background='#ff6b6b';txt.textContent='Service degraded';}
+  }).catch(function(){dot.style.background='#ff6b6b';txt.textContent='Connection failed';});
+  setTimeout(check,60000);
+})();
+</script>
+
+</body>
+</html>
