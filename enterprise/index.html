@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Enterprise — TOENK API</title>
+<meta name="description" content="Enterprise-grade AI infrastructure. GDPR, SOC2, China MLPS compliance. 99.95% SLA. Private deployment available.">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7;--green:#00d2a0;--red:#ff6b6b;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.7}
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100}
+nav .inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-size:1.25em;font-weight:700;color:var(--text);text-decoration:none}
+nav .logo span{color:var(--accent)}
+.btn{padding:10px 22px;border-radius:8px;font-size:.875em;font-weight:500;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#7c6ff0}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent)}
+section{padding:80px 24px}
+.inner{max-width:1100px;margin:0 auto}
+h1{font-size:2.5em;font-weight:800;letter-spacing:-.02em;margin:120px 0 16px;text-align:center}
+h1 span{background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{text-align:center;color:var(--text-dim);font-size:1.1em;max-width:600px;margin:0 auto 48px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:border-color .3s}
+.card:hover{border-color:var(--accent)}
+.card h3{font-size:1.1em;margin-bottom:8px}
+.card p{color:var(--text-dim);font-size:.9em}
+.card .icon{font-size:1.5em;margin-bottom:12px}
+.metric{text-align:center;padding:24px}
+.metric-num{font-size:2.2em;font-weight:800;color:var(--accent)}
+.metric-label{font-size:.85em;color:var(--text-dim);margin-top:4px}
+.metric-sub{font-size:.75em;color:var(--text-dim);margin-top:2px}
+.badge{display:inline-block;padding:4px 10px;border-radius:4px;font-size:.7em;font-weight:600;margin:2px}
+.badge-green{background:rgba(0,210,160,.15);color:var(--green)}
+.badge-accent{background:rgba(108,92,231,.15);color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:.9em}
+th{text-align:left;padding:14px 16px;color:var(--text-dim);font-weight:500;border-bottom:1px solid var(--border);font-size:.8em;text-transform:uppercase;letter-spacing:.05em}
+td{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.03)}
+.check{color:var(--green)}
+.cta-section{text-align:center;background:var(--surface);padding:80px 24px}
+.cta-section h2{font-size:2em;margin-bottom:12px}
+.cta-section p{color:var(--text-dim);margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto}
+.pricing-highlight{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.price-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;flex:1;min-width:240px;max-width:300px}
+.price-card.featured{border-color:var(--accent);box-shadow:0 0 30px rgba(108,92,231,.1)}
+.price-card .tier{font-size:.8em;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-bottom:8px}
+.price-card .price{font-size:2.2em;font-weight:800;margin-bottom:4px}
+.price-card .price span{font-size:.4em;color:var(--text-dim);font-weight:400}
+.price-card ul{list-style:none;text-align:left;margin:16px 0}
+.price-card li{padding:5px 0;font-size:.85em;border-bottom:1px solid rgba(255,255,255,.03)}
+.price-card li::before{content:'✓ ';color:var(--green)}
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text-dim);font-size:.8em}
+@media(max-width:768px){h1{font-size:1.8em} .pricing-highlight{flex-direction:column;align-items:center}}
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+<a href="/" class="logo">&#x26A1; <span>TOENK</span> API</a>
+<div><a href="/contact" class="btn btn-outline">Contact Sales</a></div>
+</div></nav>
+
+<section><div class="inner">
+<h1>Enterprise-Grade <span>AI Infrastructure</span></h1>
+<p class="hero-sub">The only platform bridging China's best AI models to global enterprises — with built-in security, compliance, and 99.95% SLA.</p>
+
+<div class="grid-4">
+<div class="metric"><div class="metric-num">99.95%</div><div class="metric-label">Enterprise SLA</div><div class="metric-sub">Financially backed</div></div>
+<div class="metric"><div class="metric-num">&lt;80ms</div><div class="metric-label">Global Latency</div><div class="metric-sub">4 regions worldwide</div></div>
+<div class="metric"><div class="metric-num">50+</div><div class="metric-label">AI Models</div><div class="metric-sub">One unified API</div></div>
+<div class="metric"><div class="metric-num">GDPR+MLPS</div><div class="metric-label">Dual Compliance</div><div class="metric-sub">EU + China ready</div></div>
+</div>
+</div></section>
+
+<section style="background:var(--surface)"><div class="inner">
+<h2 style="text-align:center;margin-bottom:8px">Why Enterprises Choose TOENK</h2>
+<p style="text-align:center;color:var(--text-dim);margin-bottom:40px">Not just an API proxy — a complete AI infrastructure layer</p>
+<div class="grid-3">
+<div class="card"><div class="icon">&#x1F6E1;</div><h3>Built-in Security Gateway</h3><p>Content filtering, PII redaction, AI watermarking, and prompt injection detection — all at the API layer. No code changes required.</p></div>
+<div class="card"><div class="icon">&#x1F4CB;</div><h3>Compliance Ready</h3><p>GDPR, SOC 2 (in progress), China MLPS 2.0. Audit logs with immutable storage. One-click compliance report export.</p></div>
+<div class="card"><div class="icon">&#x1F30D;</div><h3>Data Residency</h3><p>EU data stays in Frankfurt. China data stays in Guangzhou. Your data never crosses borders you don't want it to.</p></div>
+<div class="card"><div class="icon">&#x1F512;</div><h3>Private Deployment</h3><p>Dedicated instances, VPC peering, on-premise options. Your models, your infrastructure, our management.</p></div>
+<div class="card"><div class="icon">&#x26A1;</div><h3>99.95% SLA</h3><p>Multi-region failover, automatic channel switching, real-time health monitoring. Financially backed uptime guarantee.</p></div>
+<div class="card"><div class="icon">&#x1F465;</div><h3>Dedicated Support</h3><p>Named account manager, 1-hour response SLA, onboarding assistance, quarterly business reviews.</p></div>
+</div>
+</div></section>
+
+<section><div class="inner">
+<h2 style="text-align:center;margin-bottom:8px">Compliance Coverage</h2>
+<p style="text-align:center;color:var(--text-dim);margin-bottom:32px">Enterprise-grade certifications and frameworks</p>
+<table>
+<tr><th>Standard</th><th>Status</th><th>Coverage</th></tr>
+<tr><td><strong>SOC 2 Type II</strong></td><td><span class="badge badge-accent">In Progress Q3 2026</span></td><td>Security, Availability, Confidentiality</td></tr>
+<tr><td><strong>ISO 27001</strong></td><td><span class="badge badge-accent">In Progress Q4 2026</span></td><td>Information Security Management</td></tr>
+<tr><td><strong>GDPR</strong></td><td><span class="badge badge-green">Compliant</span></td><td>EU Data Protection</td></tr>
+<tr><td><strong>China MLPS 2.0</strong></td><td><span class="badge badge-green">Level 3 Filed</span></td><td>China Cybersecurity Law</td></tr>
+<tr><td><strong>OWASP API Top 10</strong></td><td><span class="badge badge-green">Compliant</span></td><td>API Security Best Practices</td></tr>
+<tr><td><strong>EU AI Act</strong></td><td><span class="badge badge-accent">Prepared</span></td><td>AI Content Labeling Ready</td></tr>
+</table>
+</div></section>
+
+<section style="background:var(--surface)"><div class="inner">
+<h2 style="text-align:center;margin-bottom:8px">Enterprise Plans</h2>
+<p style="text-align:center;color:var(--text-dim);margin-bottom:32px">Scalable pricing for teams of all sizes</p>
+<div class="pricing-highlight">
+<div class="price-card"><div class="tier">Business</div><div class="price">$149<span>/mo</span></div><ul><li>50M tokens / month</li><li>All 50+ models</li><li>Security gateway</li><li>Audit logs</li><li>300 RPM</li><li>GDPR compliant</li><li>Email support 4h</li></ul><a href="/contact" class="btn btn-outline" style="width:100%">Get Started</a></div>
+<div class="price-card featured"><div class="tier">Enterprise</div><div class="price">Custom</div><ul><li>Unlimited tokens</li><li>Private deployment</li><li>Dedicated channels</li><li>Custom model training</li><li>99.95% SLA</li><li>GDPR + MLPS</li><li>1h response SLA</li><li>On-premise option</li></ul><a href="/contact" class="btn btn-primary" style="width:100%">Contact Sales</a></div>
+</div>
+</div></section>
+
+<section class="cta-section"><div class="inner">
+<h2>Ready to scale your AI infrastructure?</h2>
+<p>Talk to our enterprise team about dedicated deployment, compliance requirements, and custom pricing.</p>
+<a href="/contact" class="btn btn-primary" style="padding:16px 40px;font-size:1.05em">Contact Enterprise Sales →</a>
+<p style="margin-top:16px;font-size:.85em">Or email <a href="mailto:support@toenk-api.com" style="color:var(--accent)">support@toenk-api.com</a></p>
+</div></section>
+
+<footer>&copy; 2026 TOENK API · Global AI Infrastructure · <a href="/legal/privacy" style="color:var(--text-dim)">Privacy</a> · <a href="/legal/terms" style="color:var(--text-dim)">Terms</a></footer>
+</body>
+</html>
