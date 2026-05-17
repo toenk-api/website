@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOENK API — The Global AI Infrastructure Platform</title>
+<meta name="description" content="50+ AI models. Global low-latency. Enterprise-grade security. The bridge between China AI and the world.">
+<meta property="og:title" content="TOENK API — Global AI Infrastructure">
+<meta property="og:description" content="DeepSeek, GPT, Claude, Gemini, Qwen, GLM. One API. Global reach.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #13131a;
+  --border: #1e1e2e;
+  --text: #e2e2f0;
+  --text-dim: #8888a0;
+  --accent: #6c5ce7;
+  --accent-glow: rgba(108,92,231,0.15);
+  --green: #00d2a0;
+  --red: #ff6b6b;
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+
+nav { position:fixed; top:0; width:100%; background:rgba(10,10,15,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); z-index:100; }
+nav .inner { max-width:1200px; margin:0 auto; padding:14px 24px; display:flex; align-items:center; justify-content:space-between; }
+nav .logo { font-size:1.25em; font-weight:700; color:var(--text); text-decoration:none; display:flex; align-items:center; gap:8px; }
+nav .logo span { color:var(--accent); }
+nav .links { display:flex; gap:28px; align-items:center; }
+nav .links a { color:var(--text-dim); text-decoration:none; font-size:.9em; transition:color .2s; }
+nav .links a:hover { color:var(--text); }
+nav .actions { display:flex; gap:10px; align-items:center; }
+.btn { padding:8px 18px; border-radius:8px; font-size:.875em; font-weight:500; cursor:pointer; border:none; text-decoration:none; transition:all .2s; }
+.btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--text-dim); }
+.btn-primary { background:var(--accent); color:#fff; }
+.btn-primary:hover { background:#7c6ff0; transform:translateY(-1px); box-shadow:0 4px 24px var(--accent-glow); }
+
+.hero { padding:140px 24px 80px; text-align:center; max-width:900px; margin:0 auto; }
+.hero .badge { display:inline-block; padding:6px 16px; background:var(--accent-glow); border:1px solid rgba(108,92,231,0.2); border-radius:20px; font-size:.8em; color:var(--accent); margin-bottom:24px; }
+.hero h1 { font-size:3em; font-weight:800; letter-spacing:-0.03em; line-height:1.15; margin-bottom:16px; }
+.hero h1 span { background:linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.hero .sub { font-size:1.15em; color:var(--text-dim); max-width:600px; margin:0 auto 32px; }
+.hero .cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.hero .code-block { margin-top:40px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; text-align:left; font-family:'SF Mono','Fira Code','Consolas',monospace; font-size:.8em; color:var(--text-dim); overflow-x:auto; max-width:650px; margin-left:auto; margin-right:auto; }
+.hero .code-block .c { color:#555; font-style:italic; }
+.hero .code-block .k { color:var(--accent); }
+.hero .code-block .s { color:var(--green); }
+
+.stats { display:flex; justify-content:center; gap:48px; padding:40px 24px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); flex-wrap:wrap; }
+.stat { text-align:center; }
+.stat-num { font-size:1.75em; font-weight:700; color:var(--accent); }
+.stat-label { font-size:.8em; color:var(--text-dim); margin-top:4px; }
+
+section { padding:80px 24px; }
+.section-inner { max-width:1200px; margin:0 auto; }
+.section-label { font-size:.75em; text-transform:uppercase; letter-spacing:.15em; color:var(--accent); margin-bottom:12px; }
+.section-title { font-size:2em; font-weight:700; margin-bottom:12px; }
+.section-desc { color:var(--text-dim); max-width:600px; margin-bottom:40px; }
+
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:28px; transition:border-color .3s; }
+.card:hover { border-color:var(--accent); }
+.card .icon { font-size:1.5em; margin-bottom:12px; }
+.card h3 { font-size:1.1em; margin-bottom:8px; }
+.card p { color:var(--text-dim); font-size:.9em; }
+
+.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+.pricing-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:32px 24px; text-align:center; }
+.pricing-card.featured { border-color:var(--accent); box-shadow:0 0 40px var(--accent-glow); }
+.pricing-card .tier { font-size:.8em; text-transform:uppercase; letter-spacing:.1em; color:var(--text-dim); margin-bottom:8px; }
+.pricing-card .price { font-size:2.5em; font-weight:800; margin-bottom:4px; }
+.pricing-card .price span { font-size:.4em; color:var(--text-dim); font-weight:400; }
+.pricing-card .desc { color:var(--text-dim); font-size:.85em; margin-bottom:20px; }
+.pricing-card ul { list-style:none; text-align:left; margin-bottom:24px; }
+.pricing-card li { padding:6px 0; font-size:.85em; border-bottom:1px solid rgba(255,255,255,0.03); }
+.pricing-card li::before { content:'✓ '; color:var(--green); }
+
+.model-table { width:100%; border-collapse:collapse; font-size:.9em; }
+.model-table th { text-align:left; padding:12px 16px; color:var(--text-dim); font-weight:500; border-bottom:1px solid var(--border); font-size:.8em; text-transform:uppercase; letter-spacing:.05em; }
+.model-table td { padding:14px 16px; border-bottom:1px solid rgba(255,255,255,0.03); }
+.model-table tr:hover td { background:rgba(108,92,231,0.03); }
+.model-table .highlight { color:var(--accent); font-weight:600; }
+
+footer { border-top:1px solid var(--border); padding:40px 24px; }
+.footer-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:32px; }
+footer h4 { font-size:.8em; text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; color:var(--text-dim); }
+footer a { display:block; color:var(--text-dim); text-decoration:none; font-size:.85em; padding:3px 0; transition:color .2s; }
+footer a:hover { color:var(--text); }
+footer .bottom { max-width:1200px; margin:32px auto 0; padding-top:24px; border-top:1px solid var(--border); display:flex; justify-content:space-between; color:var(--text-dim); font-size:.8em; flex-wrap:wrap; gap:12px; }
+
+@media(max-width:768px) {
+  nav .links { display:none; }
+  .hero h1 { font-size:2em; }
+  .stats { gap:24px; }
+  .stat-num { font-size:1.3em; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="logo">&#x26A1; <span>TOENK</span> API</a>
+    <div class="links">
+      <a href="/models">Models</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Docs</a>
+      <a href="/security">Security</a>
+      <a href="/blog">Blog</a>
+    </div>
+    <div class="actions">
+      <a href="/sign-in" class="btn btn-ghost">Sign In</a>
+      <a href="/sign-up" class="btn btn-primary">Get Free Tokens</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">&#x26A1; Now serving 50+ models globally</div>
+  <h1>The <span>AI Infrastructure</span><br>Platform for Global Developers</h1>
+  <p class="sub">DeepSeek. GPT. Claude. Gemini. Qwen. GLM. One API, global reach. The only platform bridging China's best AI models to the world — with enterprise security built in.</p>
+  <div class="cta">
+    <a href="/sign-up" class="btn btn-primary" style="padding:14px 32px;font-size:1em;">Start Free — 500K Tokens</a>
+    <a href="/docs" class="btn btn-ghost" style="padding:14px 32px;font-size:1em;">Read the Docs</a>
+  </div>
+  <div class="code-block">
+<span class="c"># Drop-in replacement for OpenAI SDK</span>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+client = OpenAI(
+    base_url=<span class="s">"https://api.toenk-api.com/v1"</span>,
+    api_key=<span class="s">"sk-toenk-xxxxxxxx"</span>
+)
+response = client.chat.completions.create(
+    model=<span class="s">"deepseek-v4-flash"</span>,
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"Hello!"</span>}]
+)
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">50+</div><div class="stat-label">AI Models</div></div>
+  <div class="stat"><div class="stat-num">$0.07</div><div class="stat-label">Per 1M Tokens</div></div>
+  <div class="stat"><div class="stat-num">99.97%</div><div class="stat-label">Uptime</div></div>
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">Global Regions</div></div>
+  <div class="stat"><div class="stat-num">500K</div><div class="stat-label">Free Tokens</div></div>
+</div>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">Why TOENK</div>
+    <div class="section-title">More than an API proxy</div>
+    <div class="section-desc">We don't just route your requests. We make them faster, safer, and smarter.</div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">&#x1F30F;</div>
+        <h3>Global Low-Latency</h3>
+        <p>4 regions worldwide. Your requests hit the nearest node. DeepSeek from Singapore at 30ms for APAC users.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#x1F6E1;&#xFE0F;</div>
+        <h3>Enterprise Security</h3>
+        <p>Built-in content filtering, PII redaction, audit logs, and compliance reports. GDPR + China MLPS ready.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#x1F9E0;</div>
+        <h3>Smart Routing</h3>
+        <p>Context-aware routing picks the best model for each request. Save 40-60% by auto-switching to cheaper models for simple tasks.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#x1F310;</div>
+        <h3>China ↔ World Bridge</h3>
+        <p>The only platform giving global developers access to DeepSeek, Qwen, GLM, Kimi — and Chinese enterprises access to GPT, Claude, Gemini.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#x1F4CA;</div>
+        <h3>Real-Time Analytics</h3>
+        <p>Per-model cost tracking, usage trends, spending alerts. Know exactly where your tokens go.</p>
+      </div>
+      <div class="card">
+        <div class="icon">&#x1F916;</div>
+        <h3>Agent Hosting</h3>
+        <p>Deploy LangChain and Dify agents with one click. Built-in RAG, knowledge bases, and workflow orchestration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface);">
+  <div class="section-inner">
+    <div class="section-label">Featured Models</div>
+    <div class="section-title">Battle-tested. Production-ready.</div>
+    <table class="model-table">
+      <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Input /1M</th><th>Output /1M</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="highlight">deepseek-v4-flash</td><td>DeepSeek</td><td>128K</td><td>$0.07</td><td>$0.28</td><td><span style="background:var(--green);color:#000;padding:2px 8px;border-radius:4px;font-size:.75em;font-weight:600;">BEST VALUE</span></td></tr>
+        <tr><td class="highlight">deepseek-v4-pro</td><td>DeepSeek</td><td>128K</td><td>$0.28</td><td>$1.12</td><td><span style="background:var(--accent);color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em;">MOST POWERFUL</span></td></tr>
+        <tr><td>deepseek-reasoner</td><td>DeepSeek</td><td>64K</td><td>$0.55</td><td>$2.20</td><td></td></tr>
+        <tr><td>gpt-4o</td><td>OpenAI</td><td>128K</td><td>$2.50</td><td>$10.00</td><td></td></tr>
+        <tr><td>claude-sonnet-4.6</td><td>Anthropic</td><td>1M</td><td>$3.00</td><td>$15.00</td><td></td></tr>
+        <tr><td>gemini-2.5-flash</td><td>Google</td><td>1M</td><td>$0.07</td><td>$0.56</td><td></td></tr>
+        <tr><td>qwen3.6-max</td><td>Alibaba</td><td>128K</td><td>$0.40</td><td>$1.60</td><td></td></tr>
+        <tr><td>glm-5</td><td>Zhipu</td><td>128K</td><td>$0.70</td><td>$2.80</td><td></td></tr>
+      </tbody>
+    </table>
+    <p style="text-align:center;margin-top:20px;"><a href="/models" style="color:var(--accent);text-decoration:none;">View all 50+ models →</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="section-label">Pricing</div>
+    <div class="section-title">Simple, transparent pricing</div>
+    <div class="section-desc">Start free. Scale when you're ready. No hidden fees.</div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier">Free</div>
+        <div class="price">$0<span>/month</span></div>
+        <div class="desc">500K tokens included</div>
+        <ul>
+          <li>Basic models</li>
+          <li>10 RPM</li>
+          <li>Community support</li>
+          <li>7-day audit log</li>
+        </ul>
+        <a href="/sign-up" class="btn btn-ghost" style="width:100%">Get Started</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="tier">Pro</div>
+        <div class="price">$14<span>/month</span></div>
+        <div class="desc">5M tokens included</div>
+        <ul>
+          <li>All 50+ models</li>
+          <li>Smart routing</li>
+          <li>60 RPM</li>
+          <li>Security gateway</li>
+          <li>5 Agents</li>
+          <li>Email support</li>
+        </ul>
+        <a href="/sign-up" class="btn btn-primary" style="width:100%">Start Pro</a>
+      </div>
+      <div class="pricing-card">
+        <div class="tier">Business</div>
+        <div class="price">$149<span>/month</span></div>
+        <div class="desc">50M tokens included</div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>GDPR compliance</li>
+          <li>Audit log export</li>
+          <li>300 RPM</li>
+          <li>20 Agents</li>
+          <li>4h response SLA</li>
+        </ul>
+        <a href="/contact" class="btn btn-ghost" style="width:100%">Contact Sales</a>
+      </div>
+      <div class="pricing-card">
+        <div class="tier">Enterprise</div>
+        <div class="price">Custom</div>
+        <div class="desc">Unlimited everything</div>
+        <ul>
+          <li>Private deployment</li>
+          <li>Dedicated channels</li>
+          <li>Custom models</li>
+          <li>99.95% SLA</li>
+          <li>1h response</li>
+          <li>MLPS + SOC2 reports</li>
+        </ul>
+        <a href="/contact" class="btn btn-ghost" style="width:100%">Talk to Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface);text-align:center;">
+  <div class="section-inner">
+    <div class="section-title">Ready to build?</div>
+    <p style="color:var(--text-dim);margin-bottom:24px;">500,000 free tokens. No credit card required.</p>
+    <a href="/sign-up" class="btn btn-primary" style="padding:16px 40px;font-size:1.05em;">Start Free →</a>
+  </div>
+</section>
+
+<!-- Status Bar -->
+<div id="toenk-status" style="text-align:center;padding:10px 24px;font-size:.78em;background:var(--surface);border-top:1px solid var(--border);color:var(--text-dim);">
+  <span id="status-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#555;margin-right:6px;"></span>
+  <span id="status-text">Checking services...</span>
+  <span style="margin-left:16px;">API Latency: <span id="status-latency">—</span></span>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Product</h4>
+      <a href="/models">Models</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/docs">Documentation</a>
+      <a href="/playground">Playground</a>
+      <a href="https://status.toenk-api.com">Status</a>
+    </div>
+    <div>
+      <h4>Developers</h4>
+      <a href="/docs">API Reference</a>
+      <a href="/docs/sdk">SDKs</a>
+      <a href="/changelog">Changelog</a>
+      <a href="https://github.com/toenk-api">GitHub</a>
+    </div>
+    <div>
+      <h4>Security</h4>
+      <a href="/security">Security Center</a>
+      <a href="/security/compliance">Compliance</a>
+      <a href="/security/whitepaper">Whitepaper</a>
+      <a href="/security/report">Report a Bug</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="/about">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+      <a href="/legal/privacy">Privacy</a>
+      <a href="/legal/terms">Terms</a>
+    </div>
+  </div>
+  <div class="bottom">
+    <span>&copy; 2026 TOENK API. All rights reserved.</span>
+    <span>DeepSeek Specialist · Global AI Infrastructure</span>
+  </div>
+</footer>
+
+<script>
+// === TOENK Dynamic Core ===
+(function(){
+  // 1. Language auto-detection
+  (function(){
+    if (window.toenk_lang_checked) return;
+    window.toenk_lang_checked = true;
+    var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    var path = window.location.pathname;
+    if (lang.startsWith('zh') && !path.startsWith('/zh')) {
+      window.location.replace('/zh/');
+    }
+  })();
+
+  // 2. Service status check
+  (function check(){
+    var dot = document.getElementById('status-dot');
+    var txt = document.getElementById('status-text');
+    var lat = document.getElementById('status-latency');
+    if(!dot||!txt) return;
+    var start = Date.now();
+    fetch('/health', {cache:'no-cache'})
+      .then(function(r){
+        var ms = Date.now() - start;
+        if(r.ok){
+          dot.style.background = '#00d2a0';
+          txt.textContent = 'All services operational';
+          if(lat) lat.textContent = ms + 'ms';
+        } else {
+          dot.style.background = '#ff6b6b';
+          txt.textContent = 'Service degraded';
+        }
+      })
+      .catch(function(){
+        dot.style.background = '#ff6b6b';
+        txt.textContent = 'Connection failed';
+      });
+    // Re-check every 60 seconds
+    setTimeout(check, 60000);
+  })();
+})();
+</script>
+
+</body>
+</html>
