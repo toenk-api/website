@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Use Cases — AI Infrastructure for Every Industry | TOENK API</title>
+<meta name="description" content="Real-world use cases: AI agents, customer service, code generation, content creation, research. See how teams use TOENK to power production AI applications.">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1a1a25;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7;--green:#00d2a0;--orange:#ffa94d;--blue:#4dabf7;--radius:12px;--radius-sm:8px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.7}
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100}
+nav .inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-size:1.2em;font-weight:700;color:var(--text);text-decoration:none}nav .logo span{color:var(--accent)}
+nav .links{display:flex;gap:24px}nav .links a{color:var(--text-dim);text-decoration:none;font-size:.88em;transition:color .2s}nav .links a:hover{color:var(--text)}
+nav .actions{display:flex;gap:10px}
+.btn{padding:10px 22px;border-radius:var(--radius-sm);font-size:.875em;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .2s;border:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:#7c6ff0}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--accent)}
+.btn-green{background:var(--green);color:#0a0a0f}.btn-green:hover{background:#00e6b0}
+section{padding:80px 24px}.inner{max-width:1100px;margin:0 auto}
+.hero{margin-top:80px;text-align:center}
+.hero h1{font-size:2.4em;font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.hero-sub{color:var(--text-dim);font-size:1.05em;max-width:550px;margin:0 auto 40px}
+
+.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.case{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:all .2s}
+.case:hover{border-color:var(--accent);transform:translateY(-2px)}
+.case .icon{font-size:2em;margin-bottom:16px}
+.case h3{font-size:1.15em;margin-bottom:8px}
+.case p{color:var(--text-dim);font-size:.88em;margin-bottom:16px}
+.case .tech{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.case .tech-tag{padding:3px 10px;border-radius:20px;font-size:.72em;font-weight:500;background:rgba(108,92,231,.12);color:var(--accent)}
+.case .metric{display:flex;gap:24px}
+.case .metric-item{text-align:center}
+.case .metric-num{font-size:1.4em;font-weight:700;color:var(--green)}
+.case .metric-label{font-size:.72em;color:var(--text-dim)}
+
+.cta-section{background:linear-gradient(135deg,var(--surface),rgba(108,92,231,.08));border:1px solid var(--border);border-radius:var(--radius);padding:48px;text-align:center;margin:60px 0}
+.cta-section h3{font-size:1.5em;margin-bottom:8px}
+.cta-section p{color:var(--text-dim);margin-bottom:24px}
+
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:.82em}
+footer a{color:var(--accent);text-decoration:none}
+.lang-switch{font-size:.82em;color:var(--text-dim);text-decoration:none;margin-left:12px}
+
+@media(max-width:768px){section{padding:48px 16px}.hero h1{font-size:1.8em}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="inner">
+<a href="/" class="logo">TOENK<span>API</span></a>
+<div class="links"><a href="/models/">Models</a><a href="/pricing/">Pricing</a><a href="/docs/">Docs</a><a href="/use-cases/" style="color:var(--accent);font-weight:500">Use Cases</a><a href="/enterprise/">Enterprise</a></div>
+<div class="actions"><a href="https://toenk-api.com" class="btn btn-primary" target="_blank">Get Started →</a><a href="/zh/" class="lang-switch">中文</a></div>
+</div>
+</nav>
+
+<section>
+<div class="inner">
+<div class="hero">
+<h1>AI Infrastructure for Every Industry</h1>
+<p class="hero-sub">From startups to enterprises, developers worldwide use TOENK to power production AI applications. Here's how.</p>
+</div>
+
+<div class="case-grid">
+<div class="case">
+<div class="icon">🤖</div><h3>AI Agents & Autonomous Workflows</h3>
+<p>Power autonomous agents that reason, use tools, and complete multi-step tasks. DeepSeek V4 Pro's excellent tool-calling makes it the #1 choice for agent frameworks.</p>
+<div class="tech"><span class="tech-tag">LangChain</span><span class="tech-tag">CrewAI</span><span class="tech-tag">AutoGen</span><span class="tech-tag">DeepSeek V4 Pro</span></div>
+<div class="metric"><div class="metric-item"><div class="metric-num">40-60%</div><div class="metric-label">cost reduction with Smart Routing</div></div><div class="metric-item"><div class="metric-num">3×</div><div class="metric-label">agent throughput</div></div></div>
+</div>
+
+<div class="case">
+<div class="icon">💬</div><h3>Customer Service & Chatbots</h3>
+<p>Deploy multilingual chatbots that understand context and respond naturally. Route simple queries to cost-efficient models, complex ones to advanced models.</p>
+<div class="tech"><span class="tech-tag">Streaming</span><span class="tech-tag">DeepSeek V4 Flash</span><span class="tech-tag">Qwen3</span><span class="tech-tag">Multi-turn</span></div>
+<div class="metric"><div class="metric-item"><div class="metric-num">99.9%</div><div class="metric-label">uptime SLA</div></div><div class="metric-item"><div class="metric-num">&lt;200ms</div><div class="metric-label">time to first token</div></div></div>
+</div>
+
+<div class="case">
+<div class="icon">💻</div><h3>Code Generation & Review</h3>
+<p>Build AI-powered coding assistants, code review tools, and automated bug fixers. Combine DeepSeek for cost-efficient code gen with Claude for complex refactoring.</p>
+<div class="tech"><span class="tech-tag">GitHub Copilot alternative</span><span class="tech-tag">Claude 4</span><span class="tech-tag">DeepSeek V4</span><span class="tech-tag">200K context</span></div>
+<div class="metric"><div class="metric-item"><div class="metric-num">91%+</div><div class="metric-label">HumanEval accuracy</div></div><div class="metric-item"><div class="metric-num">200K</div><div class="metric-label">max context window</div></div></div>
+</div>
+
+<div class="case">
+<div class="icon">📝</div><h3>Content Generation & Marketing</h3>
+<p>Generate blog posts, social media content, product descriptions, and email campaigns in 20+ languages. Choose the best model for each content type and language.</p>
+<div class="tech"><span class="tech-tag">Multilingual</span><span class="tech-tag">GPT-5</span><span class="tech-tag">Claude 4</span><span class="tech-tag">Batch processing</span></div>
+<div class="metric"><div class="metric-item"><div class="metric-num">20+</div><div class="metric-label">languages</div></div><div class="metric-item"><div class="metric-num">10×</div><div class="metric-label">cheaper than hiring</div></div></div>
+</div>
+
+<div class="case">
+<div class="icon">🔬</div><h3>Research & Data Analysis</h3>
+<p>Process massive documents with 1M-token context models. Analyze research papers, legal documents, and financial reports at scale.</p>
+<div class="tech"><span class="tech-tag">Gemini 2.5 Pro</span><span class="tech-tag">1M context</span><span class="tech-tag">DeepSeek-R1</span><span class="tech-tag">Chain-of-thought</span></div>
+<div class="metric"><div class="metric-item"><div class="metric-num">1M</div><div class="metric-label">token context</div></div><div class="metric-item"><div class="metric-num">96.8%</div><div class="metric-label">MATH-500 score</div></div></div>
+</div>
+
+<div class="case">
+<div class="icon">🏢</div><h3>Enterprise AI Platform</h3>
+<p>Private deployment. Custom SLAs. SSO integration. Compliance-ready infrastructure for regulated industries. Scale from PoC to production on the same platform.</p>
+<div class="tech"><span class="tech-tag">GDPR</span><span class="tech-tag">SOC2</span><span class="tech-tag">MLPS</span><span class="tech-tag">Private Cloud</span><span class="tech-tag">SSO</span></div>
+<div class="metric"><div class="metric-item"><div class="metric-num">99.95%</div><div class="metric-label">enterprise SLA</div></div><div class="metric-item"><div class="metric-num">&lt;4hr</div><div class="metric-label">support response</div></div></div>
+</div>
+</div>
+
+<div class="cta-section">
+<h3>What Will You Build?</h3>
+<p>Start with $1 free credit. Access all 50+ models. Scale when you're ready.</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+<a href="https://toenk-api.com" class="btn btn-green btn-lg" target="_blank">Start Building →</a>
+<a href="/docs/" class="btn btn-outline btn-lg">API Docs</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer><p>© 2026 TOENK API. | <a href="/use-cases/">Use Cases</a> | <a href="/pricing/">Pricing</a> | <a href="/models/">Models</a> | <a href="/contact/">Contact</a> | <a href="/zh/">中文</a></p></footer>
+</body>
+</html>
