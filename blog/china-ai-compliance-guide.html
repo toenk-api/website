@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Building AI Agents in China: A Compliance Guide — TOENK Blog</title>
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7;--green:#00d2a0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.8}
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100}
+nav .inner{max-width:1000px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-size:1.2em;font-weight:700;color:var(--text);text-decoration:none}
+nav .logo span{color:var(--accent)}
+article{max-width:720px;margin:0 auto;padding:120px 24px 60px}
+h1{font-size:2em;font-weight:800;line-height:1.3;margin-bottom:12px}
+.meta{color:var(--text-dim);font-size:.85em;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+h2{font-size:1.4em;margin:40px 0 12px;color:var(--accent)}
+h3{font-size:1.1em;margin:24px 0 8px}
+p{margin-bottom:16px;color:var(--text-dim)}
+strong{color:var(--text)}
+ul{margin:12px 0 12px 20px;color:var(--text-dim)}
+li{margin-bottom:8px}
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:.8em}
+</style>
+</head>
+<body>
+<nav><div class="inner"><a href="/" class="logo">&#x26A1; <span>TOENK</span> Blog</a><a href="/blog" style="color:var(--text-dim);text-decoration:none;font-size:.9em">← All Posts</a></div></nav>
+
+<article>
+<h1>Building AI Agents in China: A Practical Compliance Guide</h1>
+<div class="meta"><span>May 17, 2026</span><span>6 min read</span><span>Compliance · Guide · Enterprise</span></div>
+
+<p>If you're building AI agents or applications that serve users in China, you face a unique regulatory landscape. <strong>China's MLPS 2.0 (等保2.0), generative AI regulations, and data protection laws</strong> create requirements that Western platforms simply don't address. Here's how to navigate them — and how TOENK helps.</p>
+
+<h2>The Three Regulations You Must Know</h2>
+
+<h3>1. MLPS 2.0 (网络安全等级保护 2.0)</h3>
+<p>China's cybersecurity law requires organizations to classify their systems by security level (1-5) and implement corresponding controls. For AI API services, Level 3 is typical. Requirements include network security, host security, application security, data security, and audit logging.</p>
+
+<h3>2. Generative AI Service Regulations</h3>
+<p>In effect since August 2023, these require: content safety filtering, generated content labeling/watermarking, user complaint handling mechanisms, training data compliance, and filing/registration with authorities.</p>
+
+<h3>3. Personal Information Protection Law (PIPL)</h3>
+<p>Similar to GDPR, requires: consent for data collection, data localization (certain categories must stay in China), data subject rights (access, deletion, portability), and cross-border data transfer assessments.</p>
+
+<h2>How TOENK's Security Gateway Solves This</h2>
+
+<p>Instead of building compliance into every application, TOENK provides it at the API layer:</p>
+
+<ul>
+<li><strong>Content filtering</strong>: Automatic sensitive word detection and semantic review on both input and output</li>
+<li><strong>AI watermarking</strong>: Zero-width character steganography embeds traceable IDs in every AI-generated response</li>
+<li><strong>PII redaction</strong>: Auto-detects and masks ID numbers, phone numbers, bank cards, and IP addresses</li>
+<li><strong>Audit logging</strong>: Immutable audit trail with Merkle tree verification, exportable for MLPS reports</li>
+<li><strong>Data residency</strong>: China user data stays on China nodes (Guangzhou/Beijing); EU data stays in Frankfurt</li>
+<li><strong>One-click MLPS report</strong>: System auto-generates 60% of the required documentation; you fill in the rest</li>
+</ul>
+
+<h2>The Cost of DIY Compliance</h2>
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:.9em">
+<tr><th style="text-align:left;padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)">Component</th><th style="text-align:left;padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)">DIY Time</th><th style="text-align:left;padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)">DIY Cost</th><th style="text-align:left;padding:10px 14px;color:var(--text-dim);border-bottom:1px solid var(--border)">With TOENK</th></tr>
+<tr><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">Content filtering</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">2-4 weeks</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">$5K-15K</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--green)">Built-in</td></tr>
+<tr><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">AI watermarking</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">1-2 weeks</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">$3K-8K</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--green)">Built-in</td></tr>
+<tr><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">MLPS audit prep</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">4-8 weeks</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)">$10K-30K</td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--green)">1-click report</td></tr>
+<tr><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)"><strong>Total</strong></td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)"><strong>7-14 weeks</strong></td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03)"><strong>$18K-53K</strong></td><td style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--green)"><strong>$149/mo</strong></td></tr>
+</table>
+
+<h2>The Bottom Line</h2>
+<p>Compliance isn't optional in China — it's a requirement. But building it yourself costs months and tens of thousands of dollars. TOENK's security gateway gives you enterprise-grade compliance as an API feature, not a project. <strong>Switch your base URL, and you're compliant.</strong></p>
+
+<p><a href="/enterprise" style="color:var(--accent)">Learn about Enterprise compliance →</a></p>
+</article>
+<footer>&copy; 2026 TOENK API · <a href="/blog" style="color:var(--text-dim)">All Posts</a></footer>
+</body>
+</html>
