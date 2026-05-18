@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pricing — TOENK API | Transparent AI Model Pricing</title>
+<meta name="description" content="Competitive per-token pricing for 50+ AI models. No hidden fees. Pay only what you use. Enterprise volume discounts available.">
+<meta property="og:title" content="TOENK API Pricing — Transparent, Competitive"><meta property="og:description" content="Access DeepSeek, GPT, Claude, Gemini at competitive rates. Volume discounts for teams.">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1a1a25;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7;--accent-gl:#rgba(108,92,231,.15);--green:#00d2a0;--red:#ff6b6b;--orange:#ffa94d;--blue:#4dabf7;--radius:12px;--radius-sm:8px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.7}
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100}
+nav .inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-size:1.2em;font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px}
+nav .logo span{color:var(--accent)}
+nav .links{display:flex;gap:24px;align-items:center}
+nav .links a{color:var(--text-dim);text-decoration:none;font-size:.88em;transition:color .2s}
+nav .links a:hover{color:var(--text)}
+nav .actions{display:flex;gap:10px;align-items:center}
+.btn{padding:10px 22px;border-radius:var(--radius-sm);font-size:.875em;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .2s;cursor:pointer;border:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:#7c6ff0;transform:translateY(-1px);box-shadow:0 4px 20px rgba(108,92,231,.35)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--text-dim)}.btn-ghost:hover{color:var(--text)}
+.btn-lg{padding:14px 32px;font-size:1em;border-radius:12px}
+.btn-green{background:var(--green);color:#0a0a0f}.btn-green:hover{background:#00e6b0}
+section{padding:80px 24px}
+.inner{max-width:1100px;margin:0 auto}
+.hero{margin-top:80px;text-align:center}
+.hero h1{font-size:2.6em;font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{color:var(--text-dim);font-size:1.1em;max-width:600px;margin:0 auto 36px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.75em;font-weight:600}
+.badge-green{background:rgba(0,210,160,.15);color:var(--green)}
+.badge-orange{background:rgba(255,169,77,.15);color:var(--orange)}
+.badge-accent{background:var(--accent-gl);color:var(--accent)}
+
+/* Pricing Cards */
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:40px 0}
+.plan{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;position:relative;transition:all .3s;display:flex;flex-direction:column}
+.plan:hover{border-color:var(--accent);transform:translateY(-2px)}
+.plan.featured{border-color:var(--accent);background:linear-gradient(135deg,var(--surface),rgba(108,92,231,.06));box-shadow:0 0 40px rgba(108,92,231,.1)}
+.plan.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:.72em;font-weight:600;padding:4px 16px;border-radius:20px}
+.plan-name{font-size:1.2em;font-weight:700;margin-bottom:4px}
+.plan-desc{color:var(--text-dim);font-size:.85em;margin-bottom:20px}
+.plan-price{font-size:2.6em;font-weight:800;line-height:1}
+.plan-price span{font-size:.35em;color:var(--text-dim);font-weight:400}
+.plan-price .unit{font-size:.3em;color:var(--text-dim);font-weight:400;display:block}
+.plan-features{list-style:none;margin:24px 0;flex:1}
+.plan-features li{padding:6px 0;font-size:.88em;display:flex;align-items:flex-start;gap:8px}
+.plan-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.plan-features li.na{color:var(--text-dim)}.plan-features li.na::before{content:'—';color:var(--text-dim)}
+.plan .btn{margin-top:auto;justify-content:center}
+
+/* Model Pricing Table */
+.model-table{width:100%;border-collapse:collapse;font-size:.88em;margin:20px 0}
+.model-table th{text-align:left;padding:14px 16px;color:var(--text-dim);font-weight:500;border-bottom:2px solid var(--border);font-size:.82em;text-transform:uppercase;letter-spacing:.05em}
+.model-table td{padding:14px 16px;border-bottom:1px solid var(--border)}
+.model-table tr:hover td{background:var(--surface2)}
+.model-table .model-name{font-weight:600;display:flex;align-items:center;gap:8px}
+.model-table .provider-tag{font-size:.72em;padding:2px 8px;border-radius:4px;background:var(--accent-gl);color:var(--accent)}
+.model-table .price-input{color:var(--green);font-weight:600;font-family:'SF Mono',monospace}
+.model-table .price-output{color:var(--orange);font-weight:600;font-family:'SF Mono',monospace}
+.model-table .tag-new{background:rgba(255,169,77,.15);color:var(--orange);font-size:.7em;padding:2px 6px;border-radius:4px;margin-left:6px}
+
+/* Comparison */
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:20px 0}
+.compare-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center}
+.compare-card h4{font-size:1em;margin-bottom:4px}
+.compare-card .check{color:var(--green);font-size:1.2em}
+.compare-card .cross{color:var(--red);font-size:1.2em}
+.compare-header{font-weight:700;font-size:1.1em;padding:16px 0}
+.compare-row{display:grid;grid-template-columns:2fr repeat(4,1fr);align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:.85em}
+.compare-row.head{border-bottom:2px solid var(--border);font-weight:600;font-size:.8em;color:var(--text-dim);text-transform:uppercase}
+.compare-label{font-weight:500}
+
+/* FAQ */
+.faq{margin:40px 0}
+.faq-item{margin-bottom:8px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.faq-q{background:var(--surface);padding:16px 20px;font-weight:500;font-size:.95em;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';font-size:1.2em;color:var(--text-dim)}
+.faq-a{padding:0 20px 16px;color:var(--text-dim);font-size:.88em}
+
+/* CTA Section */
+.cta-section{background:linear-gradient(135deg,var(--surface),rgba(108,92,231,.08));border:1px solid var(--border);border-radius:var(--radius);padding:48px;text-align:center;margin:40px 0}
+.cta-section h3{font-size:1.6em;margin-bottom:8px}
+.cta-section p{color:var(--text-dim);margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* Volume calculator */
+.calc-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin:20px 0}
+.calc-box h3{font-size:1.1em;margin-bottom:12px}
+.calc-row{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin-bottom:16px}
+.calc-field{flex:1;min-width:150px}
+.calc-field label{display:block;font-size:.8em;color:var(--text-dim);margin-bottom:6px}
+.calc-field select,.calc-field input{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.9em}
+.calc-result{font-size:1.4em;font-weight:700;color:var(--green);padding:12px 0}
+.calc-save{font-size:.82em;color:var(--text-dim)}
+
+.tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--surface);border-radius:var(--radius-sm);padding:4px;display:inline-flex}
+.tab{padding:10px 20px;border-radius:6px;cursor:pointer;font-size:.85em;color:var(--text-dim);border:none;background:transparent;transition:all .2s;white-space:nowrap}
+.tab.active{background:var(--accent);color:#fff}
+.tab:hover:not(.active){color:var(--text)}
+
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:.82em}
+footer a{color:var(--accent);text-decoration:none}
+.lang-switch{font-size:.82em;color:var(--text-dim);text-decoration:none;margin-left:12px}
+
+@media(max-width:768px){
+  .hero h1{font-size:1.8em}
+  .plan-grid{grid-template-columns:1fr}
+  .compare-row{grid-template-columns:1fr;gap:8px;padding:16px 0}
+  section{padding:48px 16px}
+  .cta-section{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="inner">
+<a href="/" class="logo">TOENK<span>API</span><span style="font-size:.65em;color:var(--text-dim);margin-left:4px">™</span></a>
+<div class="links">
+<a href="/models/">Models</a>
+<a href="/pricing/" style="color:var(--accent);font-weight:500">Pricing</a>
+<a href="/docs/">Docs</a>
+<a href="/playground/">Playground</a>
+<a href="/blog/">Blog</a>
+<a href="/enterprise/">Enterprise</a>
+</div>
+<div class="actions">
+<a href="https://toenk-api.com" class="btn btn-outline" target="_blank">Console</a>
+<a href="https://toenk-api.com" class="btn btn-primary" target="_blank">Get Started →</a>
+<a href="/zh/" class="lang-switch">中文</a>
+</div>
+</div>
+</nav>
+
+<section>
+<div class="inner">
+<div class="hero">
+<h1>Simple, <span>Transparent</span> Pricing</h1>
+<p class="hero-sub">Pay only for what you use. No base fees. No surprises. Volume discounts for teams and enterprises.</p>
+<div class="cta-buttons" style="margin-bottom:12px">
+<a href="#plans" class="btn btn-primary btn-lg">See Plans ↓</a>
+<a href="#calculator" class="btn btn-outline btn-lg">Estimate Cost →</a>
+</div>
+</div>
+
+<!-- TIER PLANS -->
+<h2 style="text-align:center;margin-bottom:24px" id="plans">Choose Your Plan</h2>
+<div class="plan-grid">
+<div class="plan">
+<div class="plan-name">Starter</div>
+<div class="plan-desc">For individual developers & hobby projects</div>
+<div class="plan-price">$0<span>/mo</span></div>
+<ul class="plan-features">
+<li>50+ AI models via unified API</li>
+<li>Pay-per-token at standard rates</li>
+<li>1,000 free credits/month</li>
+<li>Community support</li>
+<li>99.5% uptime SLA</li>
+<li class="na">Priority support</li>
+<li class="na">Volume discounts</li>
+<li class="na">Dedicated infrastructure</li>
+</ul>
+<a href="https://toenk-api.com" class="btn btn-outline" target="_blank">Start Free →</a>
+</div>
+
+<div class="plan featured">
+<div class="plan-name">Pro</div>
+<div class="plan-desc">For startups & growing teams</div>
+<div class="plan-price">$29<span>/mo</span></div>
+<ul class="plan-features">
+<li>Everything in Starter, plus</li>
+<li>15% volume discount above $100/mo</li>
+<li>Priority API access</li>
+<li>Email support (4hr response)</li>
+<li>99.9% uptime SLA</li>
+<li>Team management (5 seats)</li>
+<li>Usage analytics dashboard</li>
+<li>Smart routing optimization</li>
+</ul>
+<a href="https://toenk-api.com" class="btn btn-primary" target="_blank">Go Pro →</a>
+</div>
+
+<div class="plan">
+<div class="plan-name">Enterprise</div>
+<div class="plan-desc">For organizations with custom needs</div>
+<div class="plan-price">Custom</div>
+<ul class="plan-features">
+<li>Everything in Pro, plus</li>
+<li>Unlimited team seats</li>
+<li>Custom volume pricing</li>
+<li>Dedicated infrastructure</li>
+<li>99.95% SLA with penalty</li>
+<li>Private deployment option</li>
+<li>Compliance (GDPR, MLPS)</li>
+<li>24/7 priority support</li>
+</ul>
+<a href="/enterprise/" class="btn btn-outline">Contact Sales →</a>
+</div>
+</div>
+
+<!-- MODEL PRICING TABLE -->
+<h2 style="text-align:center;margin:60px 0 24px">Per-Model Token Pricing</h2>
+<div class="tabs">
+<button class="tab active" onclick="showCategory('all',this)">All Models</button>
+<button class="tab" onclick="showCategory('chinese',this)">🇨🇳 Chinese AI</button>
+<button class="tab" onclick="showCategory('global',this)">🌍 Global</button>
+<button class="tab" onclick="showCategory('opensource',this)">🔓 Open Source</button>
+</div>
+
+<div style="overflow-x:auto">
+<table class="model-table" id="model-table">
+<thead>
+<tr><th>Model</th><th>Provider</th><th>Input / 1M tokens</th><th>Output / 1M tokens</th><th>Context</th></tr>
+</thead>
+<tbody>
+<tr data-cat="chinese,opensource"><td class="model-name">DeepSeek V4 Pro</td><td><span class="provider-tag">DeepSeek</span></td><td class="price-input">$1.10</td><td class="price-output">$4.40</td><td>128K</td></tr>
+<tr data-cat="chinese,opensource"><td class="model-name">DeepSeek V4 Flash</td><td><span class="provider-tag">DeepSeek</span></td><td class="price-input">$0.30</td><td class="price-output">$1.20</td><td>128K</td></tr>
+<tr data-cat="chinese,opensource"><td class="model-name">DeepSeek-R1</td><td><span class="provider-tag">DeepSeek</span></td><td class="price-input">$0.55</td><td class="price-output">$2.19</td><td>128K</td></tr>
+<tr data-cat="chinese,opensource"><td class="model-name">Qwen3-235B</td><td><span class="provider-tag">Alibaba</span></td><td class="price-input">$1.00</td><td class="price-output">$4.00</td><td>128K</td></tr>
+<tr data-cat="chinese,opensource"><td class="model-name">Qwen3-32B</td><td><span class="provider-tag">Alibaba</span></td><td class="price-input">$0.30</td><td class="price-output">$1.20</td><td>128K</td></tr>
+<tr data-cat="chinese"><td class="model-name">GLM-5</td><td><span class="provider-tag">Zhipu</span></td><td class="price-input">$1.00</td><td class="price-output">$4.00</td><td>128K</td></tr>
+<tr data-cat="chinese"><td class="model-name">MiniMax-M1</td><td><span class="provider-tag">MiniMax</span></td><td class="price-input">$0.55</td><td class="price-output">$2.19</td><td>1M</td></tr>
+<tr data-cat="chinese"><td class="model-name">Moonshot-v2</td><td><span class="provider-tag">Moonshot</span></td><td class="price-input">$0.60</td><td class="price-output">$2.40</td><td>128K</td></tr>
+<tr data-cat="chinese"><td class="model-name">Step-3</td><td><span class="provider-tag">StepFun</span></td><td class="price-input">$0.55</td><td class="price-output">$2.19</td><td>128K</td></tr>
+<tr data-cat="global"><td class="model-name">GPT-5</td><td><span class="provider-tag">OpenAI</span></td><td class="price-input">$2.50</td><td class="price-output">$10.00</td><td>128K</td></tr>
+<tr data-cat="global"><td class="model-name">Claude 4 Sonnet</td><td><span class="provider-tag">Anthropic</span></td><td class="price-input">$3.00</td><td class="price-output">$15.00</td><td>200K</td></tr>
+<tr data-cat="global"><td class="model-name">Gemini 2.5 Pro</td><td><span class="provider-tag">Google</span></td><td class="price-input">$1.25</td><td class="price-output">$5.00</td><td>1M</td></tr>
+<tr data-cat="chinese,opensource"><td class="model-name">Yi-Lightning</td><td><span class="provider-tag">01.AI</span></td><td class="price-input">$0.14</td><td class="price-output">$0.56</td><td>16K</td></tr>
+</tbody>
+</table>
+</div>
+<p style="text-align:center;color:var(--text-dim);font-size:.82em;margin-top:12px">All prices in USD. Volume discounts apply. Contact us for CNY billing.</p>
+
+<!-- COST CALCULATOR -->
+<h2 style="text-align:center;margin:60px 0 24px" id="calculator">Estimate Your Monthly Cost</h2>
+<div class="calc-box">
+<h3>📊 Usage Calculator</h3>
+<div class="calc-row">
+<div class="calc-field">
+<label>Model</label>
+<select id="calc-model" onchange="calcCost()">
+<option value="0.30/1.20">DeepSeek V4 Flash</option>
+<option value="1.10/4.40">DeepSeek V4 Pro</option>
+<option value="0.55/2.19">DeepSeek-R1</option>
+<option value="1.00/4.00">Qwen3-235B</option>
+<option value="0.14/0.56">Yi-Lightning</option>
+<option value="1.25/5.00">Gemini 2.5 Pro</option>
+<option value="2.50/10.00">GPT-5</option>
+<option value="3.00/15.00">Claude 4 Sonnet</option>
+</select>
+</div>
+<div class="calc-field">
+<label>Input tokens/month</label>
+<input type="number" id="calc-input" value="1000000" min="1000" step="100000" onchange="calcCost()">
+</div>
+<div class="calc-field">
+<label>Input:Output ratio</label>
+<select id="calc-ratio" onchange="calcCost()">
+<option value="3">3:1 (typical chat)</option>
+<option value="5">5:1 (code gen)</option>
+<option value="1">1:1 (summarization)</option>
+<option value="10">10:1 (analysis)</option>
+</select>
+</div>
+</div>
+<div class="calc-result" id="calc-result">$0.70 / month</div>
+<div class="calc-save" id="calc-save">with TOENK Smart Routing</div>
+</div>
+
+<!-- COMPARISON -->
+<h2 style="text-align:center;margin:60px 0 24px">Why TOENK vs Going Direct?</h2>
+<div style="overflow-x:auto">
+<div class="compare-row head">
+<div>Feature</div><div style="text-align:center">TOENK</div><div style="text-align:center">OpenAI Direct</div><div style="text-align:center">Anthropic Direct</div><div style="text-align:center">DeepSeek Direct</div>
+</div>
+<div class="compare-row"><div class="compare-label">One API for all models</div><div class="check" style="text-align:center">✓</div><div class="cross" style="text-align:center">✗</div><div class="cross" style="text-align:center">✗</div><div class="cross" style="text-align:center">✗</div></div>
+<div class="compare-row"><div class="compare-label">Chinese models access</div><div class="check" style="text-align:center">✓ All</div><div class="cross" style="text-align:center">✗</div><div class="cross" style="text-align:center">✗</div><div style="text-align:center;color:var(--green)">✓ Self only</div></div>
+<div class="compare-row"><div class="compare-label">Smart routing (cost optimize)</div><div class="check" style="text-align:center">✓</div><div class="cross" style="text-align:center">✗</div><div class="cross" style="text-align:center">✗</div><div class="cross" style="text-align:center">✗</div></div>
+<div class="compare-row"><div class="compare-label">Global low-latency</div><div class="check" style="text-align:center">✓</div><div style="text-align:center;color:var(--orange);font-weight:500">Regional</div><div style="text-align:center;color:var(--orange);font-weight:500">Regional</div><div style="text-align:center;color:var(--orange);font-weight:500">CN only</div></div>
+<div class="compare-row"><div class="compare-label">No China phone verification</div><div class="check" style="text-align:center">✓</div><div class="check" style="text-align:center">✓</div><div class="check" style="text-align:center">✓</div><div class="cross" style="text-align:center">✗ Required</div></div>
+<div class="compare-row"><div class="compare-label">Unified billing</div><div class="check" style="text-align:center">✓</div><div class="cross" style="text-align:center">✗</div><div class="cross" style="text-align:center">✗</div><div class="cross" style="text-align:center">✗</div></div>
+<div class="compare-row"><div class="compare-label">Enterprise compliance</div><div class="check" style="text-align:center">✓</div><span class="check" style="text-align:center">✓</span><span class="check" style="text-align:center">✓</span><span style="text-align:center;color:var(--text-dim)">Limited</span></div>
+<div class="compare-row"><div class="compare-label">Pay-per-token (no base fee)</div><div class="check" style="text-align:center">✓</div><div class="check" style="text-align:center">✓</div><div class="check" style="text-align:center">✓</div><div class="cross" style="text-align:center">✗ Prepaid</div></div>
+</div>
+
+<!-- FAQ -->
+<h2 style="text-align:center;margin:60px 0 24px">Frequently Asked Questions</h2>
+<div class="faq">
+<div class="faq-item"><div class="faq-q">How does billing work?</div><div class="faq-a" style="display:none">You're charged per token at the end of each month. No minimum commitment. You can set spending limits in the console to avoid surprises.</div></div>
+<div class="faq-item"><div class="faq-q">What's included in the free tier?</div><div class="faq-a" style="display:none">The Starter plan gives you 1,000 free credits per month (~$1 worth of API calls) and access to all models at standard rates.</div></div>
+<div class="faq-item"><div class="faq-q">How does Smart Routing save me money?</div><div class="faq-a" style="display:none">Our Smart Router automatically selects the most cost-effective model for your request while maintaining quality. For example, it routes simple queries to fast models and complex ones to advanced models — saving 40-60%.</div></div>
+<div class="faq-item"><div class="faq-q">Can I pay in CNY?</div><div class="faq-a" style="display:none">Yes. We support CNY billing for Chinese customers. Contact our sales team for details.</div></div>
+<div class="faq-item"><div class="faq-q">What about data privacy?</div><div class="faq-a" style="display:none">We don't store your prompts or completions beyond what's needed for billing. Enterprise plans include data processing agreements and private deployment options.</div></div>
+<div class="faq-item"><div class="faq-q">How do volume discounts work?</div><div class="faq-a" style="display:none">Pro plan users get 15% off when monthly spend exceeds $100. Enterprise plans receive custom volume pricing. The more you use, the less you pay per token.</div></div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+<h3>Ready to Start Building?</h3>
+<p>Sign up in 30 seconds. Get 1,000 free credits. No credit card required.</p>
+<div class="cta-buttons">
+<a href="https://toenk-api.com" class="btn btn-green btn-lg" target="_blank">Start Free →</a>
+<a href="/docs/" class="btn btn-outline btn-lg">Read Docs</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>
+<p>© 2026 TOENK API. All rights reserved. | <a href="/about/">About</a> | <a href="/contact/">Contact</a> | <a href="/zh/">中文</a></p>
+</footer>
+
+<script>
+// Category filter
+function showCategory(cat, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#model-table tbody tr').forEach(row => {
+    if (cat === 'all') { row.style.display = ''; }
+    else { row.style.display = row.dataset.cat.includes(cat) ? '' : 'none'; }
+  });
+}
+
+// Cost calculator
+function calcCost() {
+  const [inputPrice, outputPrice] = document.getElementById('calc-model').value.split('/').map(Number);
+  const inputTokens = parseInt(document.getElementById('calc-input').value) || 0;
+  const ratio = parseInt(document.getElementById('calc-ratio').value);
+  const outputTokens = Math.round(inputTokens / ratio);
+  const cost = (inputTokens/1e6 * inputPrice + outputTokens/1e6 * outputPrice).toFixed(2);
+  document.getElementById('calc-result').textContent = '$' + cost + ' / month';
+  const pctOff = Math.round(Math.min(60, 15 + (parseFloat(cost) > 100 ? 10 : 0) + (parseFloat(cost) > 500 ? 15 : 0)));
+  document.getElementById('calc-save').textContent = `Save up to ${pctOff}% with TOENK Smart Routing`;
+}
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const a = q.nextElementSibling;
+    const isOpen = a.style.display === 'block';
+    a.style.display = isOpen ? 'none' : 'block';
+    q.style.setProperty('--faq-state', isOpen ? '' : 'open');
+    q.querySelector('::after')?.style?.setProperty?.('content', isOpen ? '"+"' : '"−"');
+  });
+});
+
+calcCost();
+</script>
+
+</body>
+</html>
