@@ -1,241 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Model Catalog — TOENK API</title>
-<meta name="description" content="Compare 50+ AI models. Real-time pricing, context windows, and latency data. DeepSeek, GPT, Claude, Gemini, Qwen, GLM, and more.">
-<link rel="icon" href="/favicon.svg">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Model Catalog — 50+ AI Models | TOENK API</title>
+<meta name="description" content="Browse 50+ AI models: DeepSeek V4, GPT-5, Claude 4, Gemini 2.5, Qwen3, GLM-5, MiniMax. Filter by provider, capability, and price. Find the perfect model for your task.">
 <style>
-:root { --bg:#0a0a0f; --surface:#13131a; --border:#1e1e2e; --text:#e2e2f0; --text-dim:#8888a0; --accent:#6c5ce7; --green:#00d2a0; --radius:12px; }
-* { margin:0;padding:0;box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; line-height:1.6; }
-nav { position:fixed;top:0;width:100%;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100; }
-nav .inner { max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between; }
-nav .logo { font-size:1.25em;font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px; }
-nav .logo span { color:var(--accent); }
-nav .links { display:flex;gap:28px; }
-nav .links a { color:var(--text-dim);text-decoration:none;font-size:.9em; }
-nav .links a:hover,.nav .links a.active { color:var(--text); }
-.btn { padding:8px 18px;border-radius:8px;font-size:.875em;font-weight:500;text-decoration:none; }
-.btn-ghost { background:transparent;color:var(--text);border:1px solid var(--border); }
-.btn-primary { background:var(--accent);color:#fff; }
-section { padding:80px 24px; }
-.inner { max-width:1200px;margin:0 auto; }
-.header { padding-top:120px;text-align:center; }
-.header h1 { font-size:2.2em;font-weight:700; }
-.header p { color:var(--text-dim);margin:8px 0 24px; }
-.filters { display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px; }
-.filters select,.filters input { background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:8px;font-size:.875em; }
-.filters input { min-width:200px; }
-table { width:100%;border-collapse:collapse;font-size:.9em; }
-th { text-align:left;padding:14px 16px;color:var(--text-dim);font-weight:500;border-bottom:1px solid var(--border);font-size:.8em;text-transform:uppercase;letter-spacing:.05em;cursor:pointer; }
-th:hover { color:var(--text); }
-td { padding:16px;border-bottom:1px solid rgba(255,255,255,0.03); }
-tr:hover td { background:rgba(108,92,231,0.03); }
-.model-name { font-weight:600; }
-.model-provider { color:var(--text-dim);font-size:.8em; }
-.tag { display:inline-block;padding:2px 8px;border-radius:4px;font-size:.7em;font-weight:600;margin-right:4px; }
-.tag-chat { background:rgba(0,210,160,0.15);color:var(--green); }
-.tag-code { background:rgba(108,92,231,0.15);color:var(--accent); }
-.tag-reason { background:rgba(255,170,0,0.15);color:#fa0; }
-.tag-vision { background:rgba(0,180,255,0.15);color:#0bf; }
-.price-low { color:var(--green);font-weight:600; }
-.btn-sm { padding:6px 14px;font-size:.8em;border-radius:6px; }
-.compare-bar { position:fixed;bottom:0;width:100%;background:var(--surface);border-top:1px solid var(--accent);padding:16px 24px;display:none;z-index:99; }
-.compare-bar.active { display:flex;align-items:center;justify-content:space-between; }
-@media(max-width:768px){ table{font-size:.75em;} td,th{padding:10px 8px;} .filters{flex-direction:column;align-items:stretch;} }
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1a1a25;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7;--accent-gl:rgba(108,92,231,.15);--green:#00d2a0;--red:#ff6b6b;--orange:#ffa94d;--blue:#4dabf7;--radius:12px;--radius-sm:8px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.7}
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100}
+nav .inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-size:1.2em;font-weight:700;color:var(--text);text-decoration:none}
+nav .logo span{color:var(--accent)}
+nav .links{display:flex;gap:24px;align-items:center}
+nav .links a{color:var(--text-dim);text-decoration:none;font-size:.88em;transition:color .2s}
+nav .links a:hover{color:var(--text)}
+nav .actions{display:flex;gap:10px;align-items:center}
+.btn{padding:10px 22px;border-radius:var(--radius-sm);font-size:.875em;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .2s;border:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:#7c6ff0;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--accent)}
+.btn-green{background:var(--green);color:#0a0a0f}.btn-green:hover{background:#00e6b0}
+section{padding:80px 24px}.inner{max-width:1100px;margin:0 auto}
+.hero{margin-top:80px;text-align:center}
+.hero h1{font-size:2.4em;font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.hero-sub{color:var(--text-dim);font-size:1.05em;max-width:550px;margin:0 auto 32px}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:32px}
+.filter-btn{padding:8px 18px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-dim);font-size:.82em;cursor:pointer;transition:all .2s;white-space:nowrap}
+.filter-btn:hover,.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.search-box{display:flex;justify-content:center;margin-bottom:28px}
+.search-box input{width:100%;max-width:420px;padding:12px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:.9em;outline:none;transition:border-color .2s}
+.search-box input:focus{border-color:var(--accent)}
+.search-box input::placeholder{color:var(--text-dim)}
+
+.model-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.model-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .2s}
+.model-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.model-card .top-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.model-card .model-name{font-size:1.1em;font-weight:700}
+.model-card .model-prov{font-size:.8em;color:var(--text-dim)}
+.model-card .model-desc{color:var(--text-dim);font-size:.82em;margin-bottom:14px;line-height:1.5}
+.model-card .specs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.model-card .spec{font-size:.75em;padding:4px 10px;border-radius:4px;background:var(--bg)}
+.model-card .spec.ctx{color:var(--blue)}
+.model-card .spec.type{color:var(--orange)}
+.model-card .spec.know{color:var(--green)}
+.model-card .pricing{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border)}
+.model-card .price{font-size:.85em}.model-card .price strong{color:var(--green);font-family:'SF Mono',monospace}
+.model-card .price span{color:var(--text-dim);font-size:.78em}
+.model-card .tags{display:flex;gap:6px;flex-wrap:wrap}
+.model-card .tag{padding:2px 8px;border-radius:4px;font-size:.7em;font-weight:600}
+.tag-hot{background:rgba(255,107,107,.15);color:var(--red)}
+.tag-new{background:rgba(255,169,77,.15);color:var(--orange)}
+.tag-best{background:rgba(0,210,160,.15);color:var(--green)}
+.tag-reasoning{background:rgba(108,92,231,.15);color:var(--accent)}
+
+.use-case-section{margin:60px 0}
+.use-case-section h2{text-align:center;margin-bottom:24px;font-size:1.6em}
+.recommend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.rec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.rec-card h4{font-size:.95em;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.rec-card .rec-model{color:var(--accent);font-weight:600;font-size:.88em;margin-bottom:6px}
+.rec-card p{color:var(--text-dim);font-size:.82em}
+
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:.82em}
+footer a{color:var(--accent);text-decoration:none}
+.lang-switch{font-size:.82em;color:var(--text-dim);text-decoration:none;margin-left:12px}
+
+@media(max-width:768px){section{padding:48px 16px}.hero h1{font-size:1.8em}.model-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="inner">
-    <a href="/" class="logo">&#x26A1; <span>TOENK</span> API</a>
-    <div class="links">
-      <a href="/models" class="active">Models</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/docs">Docs</a>
-      <a href="/security">Security</a>
-      <a href="/blog">Blog</a>
-    </div>
-    <div><a href="/sign-up" class="btn btn-primary">Get Free Tokens</a></div>
-  </div>
+<div class="inner">
+<a href="/" class="logo">TOENK<span>API</span></a>
+<div class="links">
+<a href="/models/" style="color:var(--accent);font-weight:500">Models</a><a href="/pricing/">Pricing</a><a href="/docs/">Docs</a><a href="/playground/">Playground</a><a href="/compare/">Compare</a><a href="/enterprise/">Enterprise</a>
+</div>
+<div class="actions">
+<a href="https://toenk-api.com" class="btn btn-outline" target="_blank">Console</a>
+<a href="https://toenk-api.com" class="btn btn-primary" target="_blank">Get Started →</a>
+<a href="/zh/" class="lang-switch">中文</a>
+</div>
+</div>
 </nav>
 
-<div class="header">
-  <div class="inner">
-    <h1>Model Catalog</h1>
-    <p>50+ models. Real-time pricing. Find the perfect model for your task.</p>
-    <div class="filters">
-      <input type="text" placeholder="Search models..." oninput="filterTable()" id="search">
-      <select onchange="filterTable()" id="provider"><option value="">All Providers</option><option>DeepSeek</option><option>OpenAI</option><option>Anthropic</option><option>Google</option><option>Alibaba</option><option>Zhipu</option><option>Moonshot</option><option>ByteDance</option><option>Baidu</option></select>
-      <select onchange="filterTable()" id="category"><option value="">All Categories</option><option>Chat</option><option>Code</option><option>Reasoning</option><option>Vision</option><option>Embedding</option></select>
-      <select onchange="filterTable()" id="sort"><option value="">Sort: Recommended</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="context-desc">Context: Largest</option></select>
-    </div>
-  </div>
+<section>
+<div class="inner">
+<div class="hero">
+<h1>Model Catalog</h1>
+<p class="hero-sub">50+ AI models from 21+ providers. One API. Find the perfect model for every task.</p>
 </div>
 
-<section>
-  <div class="inner">
-    <table id="modelTable">
-      <thead>
-        <tr><th>Model</th><th>Provider</th><th>Category</th><th>Context</th><th>Input /1M</th><th>Output /1M</th><th></th></tr>
-      </thead>
-      <tbody>
-        <tr data-provider="DeepSeek" data-category="Chat Code" data-model="deepseek-v4-flash">
-          <td><div class="model-name">deepseek-v4-flash</div></td>
-          <td><span class="model-provider">DeepSeek</span></td>
-          <td><span class="tag tag-chat">Chat</span><span class="tag tag-code">Code</span></td>
-          <td>128K</td>
-          <td class="price-low">$0.07</td>
-          <td class="price-low">$0.28</td>
-          <td><a href="/playground?model=deepseek-v4-flash" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="DeepSeek" data-category="Reasoning Code" data-model="deepseek-v4-pro">
-          <td><div class="model-name">deepseek-v4-pro</div></td>
-          <td><span class="model-provider">DeepSeek</span></td>
-          <td><span class="tag tag-reason">Reasoning</span><span class="tag tag-code">Code</span></td>
-          <td>128K</td>
-          <td>$0.28</td><td>$1.12</td>
-          <td><a href="/playground?model=deepseek-v4-pro" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="DeepSeek" data-category="Reasoning" data-model="deepseek-reasoner">
-          <td><div class="model-name">deepseek-reasoner</div></td>
-          <td><span class="model-provider">DeepSeek</span></td>
-          <td><span class="tag tag-reason">Reasoning</span></td>
-          <td>64K</td><td>$0.55</td><td>$2.20</td>
-          <td><a href="/playground?model=deepseek-reasoner" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="DeepSeek" data-category="Chat" data-model="deepseek-chat">
-          <td><div class="model-name">deepseek-chat</div></td>
-          <td><span class="model-provider">DeepSeek</span></td>
-          <td><span class="tag tag-chat">Chat</span></td>
-          <td>64K</td><td>$0.14</td><td>$0.28</td>
-          <td><a href="/playground?model=deepseek-chat" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="OpenAI" data-category="Chat Vision Code" data-model="gpt-4o">
-          <td><div class="model-name">gpt-4o</div></td>
-          <td><span class="model-provider">OpenAI</span></td>
-          <td><span class="tag tag-chat">Chat</span><span class="tag tag-vision">Vision</span></td>
-          <td>128K</td><td>$2.50</td><td>$10.00</td>
-          <td><a href="/playground?model=gpt-4o" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="Anthropic" data-category="Chat Code" data-model="claude-sonnet-4.6">
-          <td><div class="model-name">claude-sonnet-4.6</div></td>
-          <td><span class="model-provider">Anthropic</span></td>
-          <td><span class="tag tag-chat">Chat</span><span class="tag tag-code">Code</span></td>
-          <td>1M</td><td>$3.00</td><td>$15.00</td>
-          <td><a href="/playground?model=claude-sonnet-4.6" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="Google" data-category="Chat Vision" data-model="gemini-2.5-flash">
-          <td><div class="model-name">gemini-2.5-flash</div></td>
-          <td><span class="model-provider">Google</span></td>
-          <td><span class="tag tag-chat">Chat</span><span class="tag tag-vision">Vision</span></td>
-          <td>1M</td><td class="price-low">$0.07</td><td>$0.56</td>
-          <td><a href="/playground?model=gemini-2.5-flash" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="Alibaba" data-category="Chat Code" data-model="qwen3.6-max">
-          <td><div class="model-name">qwen3.6-max</div></td>
-          <td><span class="model-provider">Alibaba</span></td>
-          <td><span class="tag tag-chat">Chat</span><span class="tag tag-code">Code</span></td>
-          <td>128K</td><td>$0.40</td><td>$1.60</td>
-          <td><a href="/playground?model=qwen3.6-max" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="Zhipu" data-category="Chat Code" data-model="glm-5">
-          <td><div class="model-name">glm-5</div></td>
-          <td><span class="model-provider">Zhipu</span></td>
-          <td><span class="tag tag-chat">Chat</span><span class="tag tag-code">Code</span></td>
-          <td>128K</td><td>$0.70</td><td>$2.80</td>
-          <td><a href="/playground?model=glm-5" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="Moonshot" data-category="Chat" data-model="kimi-k2.6">
-          <td><div class="model-name">kimi-k2.6</div></td>
-          <td><span class="model-provider">Moonshot</span></td>
-          <td><span class="tag tag-chat">Chat</span></td>
-          <td>128K</td><td>$0.50</td><td>$2.00</td>
-          <td><a href="/playground?model=kimi-k2.6" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="ByteDance" data-category="Chat" data-model="doubao-1.5-pro-256k">
-          <td><div class="model-name">doubao-1.5-pro-256k</div></td>
-          <td><span class="model-provider">ByteDance</span></td>
-          <td><span class="tag tag-chat">Chat</span></td>
-          <td>256K</td><td>$0.35</td><td>$1.40</td>
-          <td><a href="/playground?model=doubao-1.5-pro-256k" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="Baidu" data-category="Chat" data-model="ernie-4.0-turbo">
-          <td><div class="model-name">ernie-4.0-turbo</div></td>
-          <td><span class="model-provider">Baidu</span></td>
-          <td><span class="tag tag-chat">Chat</span></td>
-          <td>8K</td><td>$0.60</td><td>$2.40</td>
-          <td><a href="/playground?model=ernie-4.0-turbo" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-        <tr data-provider="" data-category="Embedding" data-model="text-embedding-v3">
-          <td><div class="model-name">text-embedding-v3</div></td>
-          <td><span class="model-provider">—</span></td>
-          <td><span class="tag tag-code">Embedding</span></td>
-          <td>8K</td><td class="price-low">$0.01</td><td>—</td>
-          <td><a href="/playground?model=text-embedding-v3" class="btn btn-ghost btn-sm">Try</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="search-box">
+<input type="text" id="search" placeholder="🔍 Search models by name, provider, or capability..." oninput="filterModels()">
+</div>
+<div class="filters">
+<button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+<button class="filter-btn" onclick="setFilter('chinese',this)">🇨🇳 Chinese AI</button>
+<button class="filter-btn" onclick="setFilter('global',this)">🌍 Global</button>
+<button class="filter-btn" onclick="setFilter('reasoning',this)">🧠 Reasoning</button>
+<button class="filter-btn" onclick="setFilter('coding',this)">💻 Coding</button>
+<button class="filter-btn" onclick="setFilter('multimodal',this)">👁️ Multimodal</button>
+<button class="filter-btn" onclick="setFilter('opensource',this)">🔓 Open Source</button>
+</div>
+
+<div class="model-grid" id="model-grid">
+<!-- Models populated by JS -->
+</div>
+
+<!-- USE CASE RECOMMENDATIONS -->
+<div class="use-case-section">
+<h2>Recommended by Use Case</h2>
+<div class="recommend-grid">
+<div class="rec-card"><h4>🤖 AI Agents</h4><div class="rec-model">DeepSeek V4 Pro</div><p>Best for autonomous agents with tool calling. Strong reasoning, 128K context, excellent function calling accuracy.</p></div>
+<div class="rec-card"><h4>💰 Best Value</h4><div class="rec-model">DeepSeek V4 Flash</div><p>30% the cost of GPT-5 with comparable quality. Ideal for high-volume production workloads.</p></div>
+<div class="rec-card"><h4>🧮 Complex Reasoning</h4><div class="rec-model">DeepSeek-R1</div><p>Chain-of-thought reasoning model. Excels at math, logic, and multi-step problem solving.</p></div>
+<div class="rec-card"><h4>💻 Code Generation</h4><div class="rec-model">Claude 4 Sonnet</div><p>Top-tier coding performance. 200K context for large codebase understanding. Consistent, reliable output.</p></div>
+<div class="rec-card"><h4>📚 Long Documents</h4><div class="rec-model">Gemini 2.5 Pro</div><p>1M token context window. Process entire books, codebases, or document archives in a single request.</p></div>
+<div class="rec-card"><h4>🌐 Multilingual</h4><div class="rec-model">Qwen3-235B</div><p>Best Chinese+English bilingual performance. Strong across 20+ languages. Alibaba's flagship.</p></div>
+</div>
+</div>
+</div>
 </section>
 
-<div id="toenk-status" style="text-align:center;padding:10px 24px;font-size:.78em;background:var(--surface);border-top:1px solid var(--border);color:var(--text-dim);">
-  <span id="status-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#555;margin-right:6px;"></span>
-  <span id="status-text">Checking services...</span>
-  <span style="margin-left:16px;" id="price-updated"></span>
-</div>
+<footer>
+<p>© 2026 TOENK API. | <a href="/models/">Models</a> | <a href="/pricing/">Pricing</a> | <a href="/docs/">Docs</a> | <a href="/contact/">Contact</a> | <a href="/zh/">中文</a></p>
+</footer>
 
 <script>
-// === Filter ===
-function filterTable() {
-  var s=(document.getElementById('search').value||'').toLowerCase();
-  var p=document.getElementById('provider').value;
-  var c=document.getElementById('category').value;
-  document.querySelectorAll('#modelTable tbody tr').forEach(function(r){
-    var ok=(!s||r.textContent.toLowerCase().indexOf(s)>=0)&&(!p||r.dataset.provider===p)&&(!c||(r.dataset.category||'').indexOf(c)>=0);
-    r.style.display=ok?'':'none';
-  });
+const models = [
+  {name:"DeepSeek V4 Pro",prov:"DeepSeek",desc:"Flagship reasoning model. Best-in-class for agents, coding, and complex tasks.",ctx:"128K",type:"Chat",know:"2025-12",price:"$1.10 / $4.40",tags:["hot"],cats:["chinese","reasoning","coding","opensource"]},
+  {name:"DeepSeek V4 Flash",prov:"DeepSeek",desc:"Fast, affordable model with near-flagship quality. Best value for production.",ctx:"128K",type:"Chat",know:"2025-12",price:"$0.30 / $1.20",tags:["best"],cats:["chinese","coding","opensource"]},
+  {name:"DeepSeek-R1",prov:"DeepSeek",desc:"Chain-of-thought reasoning. Excels at math, logic, and multi-step problems.",ctx:"128K",type:"Reasoning",know:"2025-01",price:"$0.55 / $2.19",tags:["reasoning"],cats:["chinese","reasoning","opensource"]},
+  {name:"DeepSeek-V3",prov:"DeepSeek",desc:"Previous-gen flagship. Still strong for general tasks at lower cost.",ctx:"128K",type:"Chat",know:"2024-12",price:"$0.27 / $1.10",cats:["chinese","opensource"]},
+  {name:"Qwen3-235B",prov:"Alibaba",desc:"Alibaba's flagship MoE model. Strong multilingual, coding, and reasoning.",ctx:"128K",type:"Chat",know:"2025-04",price:"$1.00 / $4.00",tags:["new"],cats:["chinese","reasoning","coding","opensource"]},
+  {name:"Qwen3-32B",prov:"Alibaba",desc:"Efficient mid-size model. Great balance of performance and cost.",ctx:"128K",type:"Chat",know:"2025-04",price:"$0.30 / $1.20",tags:["new"],cats:["chinese","opensource"]},
+  {name:"GLM-5",prov:"Zhipu",desc:"Zhipu's latest. Strong Chinese language understanding and multimodal capabilities.",ctx:"128K",type:"Chat",know:"2025-06",price:"$1.00 / $4.00",tags:["new"],cats:["chinese","multimodal"]},
+  {name:"GLM-4",prov:"Zhipu",desc:"Previous-gen Zhipu model. Good Chinese performance at lower cost.",ctx:"128K",type:"Chat",know:"2024-06",price:"$0.50 / $2.00",cats:["chinese"]},
+  {name:"MiniMax-M1",prov:"MiniMax",desc:"1M context MoE model. Excellent for long document processing.",ctx:"1M",type:"Chat",know:"2025-05",price:"$0.55 / $2.19",tags:["new"],cats:["chinese","opensource"]},
+  {name:"Moonshot-v2",prov:"Moonshot",desc:"Kimi's latest. Strong long-context understanding and analysis.",ctx:"128K",type:"Chat",know:"2025-03",price:"$0.60 / $2.40",cats:["chinese"]},
+  {name:"Yi-Lightning",prov:"01.AI",desc:"Ultra-fast, ultra-cheap. Best for simple queries at minimal cost.",ctx:"16K",type:"Chat",know:"2024-10",price:"$0.14 / $0.56",tags:["best"],cats:["chinese","opensource"]},
+  {name:"Step-3",prov:"StepFun",desc:"Strong general-purpose model with good Chinese performance.",ctx:"128K",type:"Chat",know:"2025-02",price:"$0.55 / $2.19",cats:["chinese"]},
+  {name:"GPT-5",prov:"OpenAI",desc:"Latest OpenAI flagship. Top-tier across all benchmarks.",ctx:"128K",type:"Chat",know:"2025-06",price:"$2.50 / $10.00",tags:["hot"],cats:["global","reasoning","coding","multimodal"]},
+  {name:"GPT-4o",prov:"OpenAI",desc:"Fast multimodal model. Great for vision tasks and real-time interaction.",ctx:"128K",type:"Multimodal",know:"2024-05",price:"$2.50 / $10.00",cats:["global","multimodal"]},
+  {name:"Claude 4 Sonnet",prov:"Anthropic",desc:"Anthropic's latest. Exceptional coding, writing, and analysis.",ctx:"200K",type:"Chat",know:"2025-06",price:"$3.00 / $15.00",tags:["hot"],cats:["global","reasoning","coding"]},
+  {name:"Claude 3.5 Haiku",prov:"Anthropic",desc:"Fast, affordable Anthropic model. Good for simple tasks.",ctx:"200K",type:"Chat",know:"2024-10",price:"$0.80 / $4.00",cats:["global"]},
+  {name:"Gemini 2.5 Pro",prov:"Google",desc:"Google's latest. 1M context. Excellent at long-form understanding.",ctx:"1M",type:"Chat",know:"2025-03",price:"$1.25 / $5.00",tags:["new"],cats:["global","reasoning","multimodal"]},
+  {name:"Gemini 2.5 Flash",prov:"Google",desc:"Fast Google model. Good for high-throughput applications.",ctx:"1M",type:"Chat",know:"2025-03",price:"$0.15 / $0.60",cats:["global"]},
+  {name:"Llama 4 Maverick",prov:"Meta",desc:"Meta's open-source flagship. Strong general performance.",ctx:"128K",type:"Chat",know:"2025-04",price:"$0.60 / $2.00",cats:["global","opensource"]},
+]
+
+let currentFilter = 'all'
+
+function renderModels(filtered) {
+  const grid = document.getElementById('model-grid')
+  grid.innerHTML = filtered.map(m => `
+    <div class="model-card">
+      <div class="top-row">
+        <div>
+          <div class="model-name">${m.name}</div>
+          <div class="model-prov">${m.prov}</div>
+        </div>
+        <div class="tags">${(m.tags||[]).map(t => {
+          if(t==='hot') return '<span class="tag tag-hot">HOT</span>'
+          if(t==='new') return '<span class="tag tag-new">NEW</span>'
+          if(t==='best') return '<span class="tag tag-best">BEST VALUE</span>'
+          if(t==='reasoning') return '<span class="tag tag-reasoning">REASONING</span>'
+          return ''
+        }).join('')}</div>
+      </div>
+      <div class="model-desc">${m.desc}</div>
+      <div class="specs">
+        <span class="spec ctx">📐 ${m.ctx} context</span>
+        <span class="spec type">⚡ ${m.type}</span>
+        <span class="spec know">📅 ${m.know}</span>
+      </div>
+      <div class="pricing">
+        <div class="price"><strong>${m.price.split(' / ')[0]}</strong> <span>in / 1M tok</span></div>
+        <div class="price" style="text-align:right"><strong>${m.price.split(' / ')[1]||''}</strong> <span>out / 1M tok</span></div>
+      </div>
+    </div>
+  `).join('')
 }
-document.getElementById('search').addEventListener('input',filterTable);
-document.getElementById('provider').addEventListener('change',filterTable);
-document.getElementById('category').addEventListener('change',filterTable);
 
-// === Live Pricing (auto-refresh from API) ===
-(function loadPrices(){
-  fetch('/v1/models/public',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(data){
-    var models=data.data||data||[];
-    models.forEach(function(m){
-      var row=document.querySelector('[data-model="'+m.id+'"]');
-      if(row){
-        var cells=row.querySelectorAll('td');
-        var p=m.pricing||{};
-        var inp=(p.prompt||p.input||0)/1000000;
-        var out=(p.completion||p.output||0)/1000000;
-        if(cells[4])cells[4].textContent='$'+inp.toFixed(inp<0.01?4:2);
-        if(cells[5])cells[5].textContent='$'+out.toFixed(out<0.01?4:2);
-      }
-    });
-    // Update timestamp
-    var ts=document.getElementById('price-updated');
-    if(ts)ts.textContent='Prices updated: '+(new Date()).toLocaleTimeString();
-  }).catch(function(){}); // Silently fall back to static prices
-})();
+function filterModels() {
+  const search = (document.getElementById('search').value||'').toLowerCase()
+  let filtered = models
+  
+  if (currentFilter !== 'all') {
+    filtered = filtered.filter(m => m.cats.includes(currentFilter))
+  }
+  
+  if (search) {
+    filtered = filtered.filter(m => 
+      m.name.toLowerCase().includes(search) || 
+      m.prov.toLowerCase().includes(search) ||
+      m.desc.toLowerCase().includes(search) ||
+      m.cats.some(c => c.includes(search))
+    )
+  }
+  
+  renderModels(filtered)
+}
 
-// === Status Bar ===
-(function check(){
-  var dot=document.getElementById('status-dot'),txt=document.getElementById('status-text');
-  if(!dot||!txt)return;
-  var start=Date.now();
-  fetch('/health',{cache:'no-cache'}).then(function(r){
-    if(r.ok){dot.style.background='#00d2a0';txt.textContent='All services operational ('+(Date.now()-start)+'ms)';}
-    else{dot.style.background='#ff6b6b';txt.textContent='Service degraded';}
-  }).catch(function(){dot.style.background='#ff6b6b';txt.textContent='Connection failed';});
-  setTimeout(check,60000);
-})();
+function setFilter(f, btn) {
+  currentFilter = f
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
+  btn.classList.add('active')
+  filterModels()
+}
+
+// Initial render
+renderModels(models)
 </script>
-
 </body>
 </html>
