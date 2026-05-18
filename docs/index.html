@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Documentation — TOENK API</title>
+<meta name="description" content="TOENK API documentation — OpenAI-compatible endpoints, models, quickstart guides.">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7;--green:#00d2a0;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.7}
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100}
+nav .inner{max-width:1100px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-size:1.2em;font-weight:700;color:var(--text);text-decoration:none}
+nav .logo span{color:var(--accent)}
+main{max-width:1100px;margin:0 auto;padding:120px 24px 60px}
+h1{font-size:2.2em;font-weight:800;margin-bottom:8px}
+.sub{color:var(--text-dim);margin-bottom:40px}
+h2{font-size:1.3em;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+h3{font-size:1.05em;margin:24px 0 8px;color:var(--accent)}
+p{color:var(--text-dim);margin-bottom:12px}
+code{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:.9em;color:var(--green)}
+pre{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;overflow-x:auto;margin:12px 0;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:.85em;line-height:1.6}
+pre .c{color:#555;font-style:italic}
+pre .k{color:var(--accent)}
+pre .s{color:var(--green)}
+pre .n{color:var(--text-dim)}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9em}
+th{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-dim);font-size:.8em;text-transform:uppercase}
+td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.03)}
+td code{background:none;border:none;padding:0}
+.sidebar{position:fixed;top:100px;left:max(24px,calc((100vw - 1100px)/2 - 220px));width:180px;font-size:.85em}
+.sidebar a{display:block;color:var(--text-dim);text-decoration:none;padding:5px 0;transition:color .2s}
+.sidebar a:hover,.sidebar a.active{color:var(--accent)}
+.content{margin-left:200px}
+.endpoint{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin:16px 0}
+.endpoint .method{display:inline-block;padding:2px 10px;border-radius:4px;font-size:.75em;font-weight:700;margin-right:8px;color:#fff}
+.endpoint .method.post{background:#00d2a0}
+.endpoint .method.get{background:#6c5ce7}
+.endpoint .path{font-family:monospace;font-size:.95em}
+.endpoint p{color:var(--text-dim);margin:8px 0 0}
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:.8em}
+@media(max-width:900px){.sidebar{display:none}.content{margin-left:0}}
+</style>
+</head>
+<body>
+<nav><div class="inner"><a href="/" class="logo">&#x26A1; <span>TOENK</span> API</a><div><a href="/sign-up" class="btn" style="background:var(--accent);color:#fff;padding:8px 18px;border-radius:8px;text-decoration:none;font-size:.875em">Get Started</a></div></div></nav>
+
+<aside class="sidebar">
+  <strong style="color:var(--text);font-size:.8em;text-transform:uppercase;letter-spacing:.1em">Docs</strong>
+  <a href="#quickstart" class="active">Quickstart</a>
+  <a href="#authentication">Authentication</a>
+  <a href="#chat">Chat Completions</a>
+  <a href="#models-list">Models</a>
+  <a href="#streaming">Streaming</a>
+  <a href="#errors">Error Handling</a>
+</aside>
+
+<div class="content">
+<h1>API Documentation</h1>
+<p class="sub">TOENK is fully compatible with the OpenAI client SDK. Change one line and go.</p>
+
+<h2 id="quickstart">Quickstart</h2>
+<p>Install the OpenAI Python SDK and point <code>base_url</code> to TOENK:</p>
+<pre><span class="c"># Install</span>
+pip install openai
+
+<span class="c"># Use TOENK</span>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = OpenAI(
+    base_url=<span class="s">"https://api.toenk-api.com/v1"</span>,
+    api_key=<span class="s">"sk-your-key-here"</span>
+)
+
+response = client.chat.completions.create(
+    model=<span class="s">"deepseek-v4-flash"</span>,
+    messages=[
+        {<span class="s">"role"</span>: <span class="s">"system"</span>, <span class="s">"content"</span>: <span class="s">"You are a helpful assistant."</span>},
+        {<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"Hello!"</span>}
+    ]
+)
+
+<span class="n">print</span>(response.choices[<span class="n">0</span>].message.content)
+</pre>
+
+<h2 id="authentication">Authentication</h2>
+<p>Include your API key in the <code>Authorization</code> header as a Bearer token:</p>
+<pre>Authorization: Bearer sk-your-api-key</pre>
+<p>Get your key at <a href="/sign-in" style="color:var(--accent)">toenk-api.com/sign-in</a>. Keep it secret — don't expose it in client-side code or public repos.</p>
+
+<h2 id="chat">Chat Completions</h2>
+<p>TOENK supports the full OpenAI Chat Completions API:</p>
+
+<div class="endpoint">
+  <span class="method post">POST</span>
+  <span class="path">/v1/chat/completions</span>
+  <p>Create a chat completion. Supports text, multi-turn conversation, and vision-capable models.</p>
+</div>
+
+<h3>Request Body</h3>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr>
+<tr><td><code>model</code></td><td>string</td><td>Yes</td><td>Model ID, e.g. <code>deepseek-v4-flash</code>, <code>gpt-4o</code></td></tr>
+<tr><td><code>messages</code></td><td>array</td><td>Yes</td><td>Array of message objects with <code>role</code> and <code>content</code></td></tr>
+<tr><td><code>temperature</code></td><td>number</td><td>No</td><td>0-2. Higher = more random. Default: 0.7</td></tr>
+<tr><td><code>max_tokens</code></td><td>integer</td><td>No</td><td>Maximum tokens to generate</td></tr>
+<tr><td><code>stream</code></td><td>boolean</td><td>No</td><td>Enable token-by-token streaming. Default: false</td></tr>
+<tr><td><code>top_p</code></td><td>number</td><td>No</td><td>Nucleus sampling. Default: 1</td></tr>
+</table>
+
+<h3>Example Response</h3>
+<pre>{
+  <span class="s">"id"</span>: <span class="s">"chatcmpl-abc123"</span>,
+  <span class="s">"object"</span>: <span class="s">"chat.completion"</span>,
+  <span class="s">"model"</span>: <span class="s">"deepseek-v4-flash"</span>,
+  <span class="s">"choices"</span>: [{
+    <span class="s">"index"</span>: <span class="n">0</span>,
+    <span class="s">"message"</span>: {
+      <span class="s">"role"</span>: <span class="s">"assistant"</span>,
+      <span class="s">"content"</span>: <span class="s">"Hello! How can I help you today?"</span>
+    },
+    <span class="s">"finish_reason"</span>: <span class="s">"stop"</span>
+  }],
+  <span class="s">"usage"</span>: {
+    <span class="s">"prompt_tokens"</span>: <span class="n">15</span>,
+    <span class="s">"completion_tokens"</span>: <span class="n">9</span>,
+    <span class="s">"total_tokens"</span>: <span class="n">24</span>
+  }
+}</pre>
+
+<h2 id="models-list">List Models</h2>
+<div class="endpoint">
+  <span class="method get">GET</span>
+  <span class="path">/v1/models</span>
+  <p>Returns all available models with pricing and context window info.</p>
+</div>
+
+<h3>Example (cURL)</h3>
+<pre>curl https://api.toenk-api.com/v1/models \
+  -H <span class="s">"Authorization: Bearer sk-your-key"</span></pre>
+
+<p>See <a href="/models" style="color:var(--accent)">Models page</a> for the full catalog with pricing.</p>
+
+<h2 id="streaming">Streaming</h2>
+<p>Enable streaming with <code>stream: true</code>. Responses arrive as Server-Sent Events (SSE):</p>
+<pre><span class="k">stream</span> = client.chat.completions.create(
+    model=<span class="s">"deepseek-v4-flash"</span>,
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"Tell me a story"</span>}],
+    stream=<span class="k">True</span>
+)
+<span class="k">for</span> chunk <span class="k">in</span> <span class="n">stream</span>:
+    <span class="k">if</span> chunk.choices[<span class="n">0</span>].delta.content:
+        <span class="n">print</span>(chunk.choices[<span class="n">0</span>].delta.content, end=<span class="s">""</span>)</pre>
+
+<h2 id="errors">Error Handling</h2>
+<table>
+<tr><th>Code</th><th>Meaning</th></tr>
+<tr><td><code>400</code></td><td>Bad request — check your parameters</td></tr>
+<tr><td><code>401</code></td><td>Invalid or missing API key</td></tr>
+<tr><td><code>429</code></td><td>Rate limit exceeded. Retry with backoff.</td></tr>
+<tr><td><code>500</code></td><td>TOENK internal error. Contact support.</td></tr>
+<tr><td><code>503</code></td><td>Service unavailable. Temporary outage.</td></tr>
+</table>
+
+<h2 id="sdks">SDKs & Libraries</h2>
+<p>TOENK is compatible with any OpenAI-compatible SDK:</p>
+<ul style="color:var(--text-dim);margin-left:20px">
+  <li><a href="https://github.com/openai/openai-python" style="color:var(--accent)">openai-python</a> — Official Python client</li>
+  <li><a href="https://github.com/openai/openai-node" style="color:var(--accent)">openai-node</a> — Official Node.js client</li>
+  <li><a href="https://github.com/anthropics/anthropic-sdk-python" style="color:var(--accent)">Vercel AI SDK</a> — Works with any OpenAI-compatible endpoint</li>
+  <li><a href="https://www.langchain.com/" style="color:var(--accent)">LangChain</a> — <code>ChatOpenAI(base_url="...")</code></li>
+  <li><a href="https://github.com/nousresearch/hermes-agent" style="color:var(--accent)">Hermes Agent</a> — Nous Research AI agent framework</li>
+</ul>
+</div>
+
+<footer>&copy; 2026 TOENK API · Documentation</footer>
+</body>
+</html>
