@@ -3,44 +3,75 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>About — TOENK API</title>
+<meta name="description" content="TOENK is a global AI infrastructure platform. We connect developers to 50+ AI models through a single, secure, API.">
 <style>
-:root{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7}
+:root{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7;--green:#00d2a0;--radius:12px}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.7}
 nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100}
-nav .inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
-nav .logo{font-size:1.25em;font-weight:700;color:var(--text);text-decoration:none}
+nav .inner{max-width:1000px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-size:1.2em;font-weight:700;color:var(--text);text-decoration:none}
 nav .logo span{color:var(--accent)}
-.btn{padding:8px 18px;border-radius:8px;font-size:.875em;font-weight:500;text-decoration:none}
-.btn-primary{background:var(--accent);color:#fff}
-section{padding:80px 24px;max-width:800px;margin:0 auto}
-h1{font-size:2.2em;font-weight:700;margin:120px 0 16px}
-h2{font-size:1.3em;margin:32px 0 12px;color:var(--accent)}
-p{color:var(--text-dim);margin-bottom:12px}
-.stats{display:flex;gap:40px;flex-wrap:wrap;margin:24px 0}
-.stat-num{font-size:2em;font-weight:700;color:var(--accent)}
+main{max-width:800px;margin:0 auto;padding:120px 24px 60px}
+h1{font-size:2.5em;font-weight:800;margin-bottom:8px}
+h1 span{background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--text-dim);font-size:1.1em;margin-bottom:48px}
+h2{font-size:1.4em;margin:48px 0 12px;color:var(--accent)}
+h3{font-size:1.1em;margin:24px 0 8px}
+p{color:var(--text-dim);margin-bottom:16px}
+.stats{display:flex;gap:40px;flex-wrap:wrap;margin:32px 0}
+.stat{text-align:center;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);flex:1;min-width:140px}
+.stat-num{font-size:2em;font-weight:800;color:var(--accent)}
 .stat-label{font-size:.85em;color:var(--text-dim)}
-footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text-dim);font-size:.8em}
+.timeline{position:relative;padding-left:24px;border-left:2px solid var(--border);margin:24px 0}
+.timeline-item{margin-bottom:28px;position:relative}
+.timeline-item::before{content:'';position:absolute;left:-30px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.timeline-item h4{font-size:1em;margin-bottom:4px}
+.timeline-item p{font-size:.85em;color:var(--text-dim)}
+.vision{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;margin:32px 0;text-align:center}
+.vision p{font-size:1.1em;color:var(--text);font-style:italic}
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:.8em}
 </style>
 </head>
 <body>
-<nav><div class="inner"><a href="/" class="logo">&#x26A1; <span>TOENK</span> API</a><div><a href="/sign-up" class="btn btn-primary">Get Started</a></div></div></nav>
-<section>
-<h1>About TOENK</h1>
-<p>TOENK is a global AI infrastructure platform. We connect developers to the world's best AI models — DeepSeek, GPT, Claude, Gemini, Qwen, GLM, and more — through a single, unified API.</p>
-<h2>Our Mission</h2>
-<p>Make AI accessible, affordable, and secure for every developer on the planet. We built TOENK because we believe the last mile of AI adoption shouldn't be about API keys and infrastructure — it should be about building great products.</p>
-<h2>By the Numbers</h2>
-<div class="stats">
-<div><div class="stat-num">50+</div><div class="stat-label">AI Models</div></div>
-<div><div class="stat-num">4</div><div class="stat-label">Global Regions</div></div>
-<div><div class="stat-num">99.97%</div><div class="stat-label">Uptime</div></div>
-<div><div class="stat-num">2025</div><div class="stat-label">Founded</div></div>
+<nav><div class="inner"><a href="/" class="logo">&#x26A1; <span>TOENK</span> API</a><div><a href="/contact" style="color:var(--accent);text-decoration:none;font-size:.9em">Contact</a></div></div></nav>
+
+<main>
+<h1>About <span>TOENK</span></h1>
+<p class="sub">The global AI infrastructure platform — bridging China's best AI to the world, and the world's best AI to China.</p>
+
+<div class="vision">
+<p>"The last mile of AI adoption shouldn't be about API keys and infrastructure — it should be about building great products. We built TOENK to handle the pipes, the security, and the compliance, so developers can focus on what matters."</p>
 </div>
+
+<div class="stats">
+<div class="stat"><div class="stat-num">2025</div><div class="stat-label">Founded</div></div>
+<div class="stat"><div class="stat-num">50+</div><div class="stat-label">AI Models</div></div>
+<div class="stat"><div class="stat-num">4</div><div class="stat-label">Global Regions</div></div>
+<div class="stat"><div class="stat-num">99.97%</div><div class="stat-label">Uptime</div></div>
+</div>
+
+<h2>Our Story</h2>
+<p>In 2025, we saw a gap: Chinese AI models like DeepSeek, Qwen, and GLM were reaching GPT-4 class performance at a fraction of the cost — but global developers struggled to access them with low latency. Meanwhile, Chinese enterprises building AI applications faced significant compliance hurdles when using overseas models like GPT-4 and Claude.</p>
+<p>TOENK was born to solve both sides of this equation. We're not just an API proxy — we're the infrastructure layer that makes AI work across borders, securely and compliantly.</p>
+
+<h2>What Makes Us Different</h2>
+<p><strong>Bidirectional Bridge</strong>: We're the only platform that gives global developers low-latency access to DeepSeek, Qwen, GLM, and Kimi — while simultaneously giving Chinese enterprises compliant access to GPT-4, Claude, and Gemini.</p>
+<p><strong>Security by Default</strong>: Content filtering, PII redaction, AI watermarking, and audit logging are built into every API call. Not add-ons — core features.</p>
+<p><strong>Smart Routing</strong>: Our context-aware engine automatically picks the optimal model for each request, cutting API costs by 40-60% without sacrificing quality.</p>
+
+<h2>Roadmap</h2>
+<div class="timeline">
+<div class="timeline-item"><h4>2026 Q2 — Platform Foundation</h4><p>Global website launch · Blog & developer content · Playground · Smart routing engine · Cloudflare CDN</p></div>
+<div class="timeline-item"><h4>2026 Q3 — Security & Compliance</h4><p>SOC 2 Type II audit · Security gateway GA · MLPS 2.0 compliance reports · EU (Frankfurt) node · Status page</p></div>
+<div class="timeline-item"><h4>2026 Q4 — Enterprise Scale</h4><p>ISO 27001 certification · Agent hosting platform · Private deployment option · North America (Oregon) node · 99.99% SLA</p></div>
+<div class="timeline-item"><h4>2027 — Ecosystem</h4><p>Model fine-tuning API · Knowledge base (RAG) service · Workflow orchestration · Partner marketplace · Multi-cloud deployment</p></div>
+</div>
+
 <h2>Contact</h2>
-<p>Email: hello@toenk-api.com</p>
-<p>GitHub: github.com/toenk-api</p>
-</section>
-<footer>&copy; 2026 TOENK API. All rights reserved.</footer>
+<p>Email: <a href="mailto:support@toenk-api.com" style="color:var(--accent)">support@toenk-api.com</a></p>
+<p>GitHub: <a href="https://github.com/toenk-api" style="color:var(--accent)">github.com/toenk-api</a></p>
+</main>
+<footer>&copy; 2026 TOENK API · Global AI Infrastructure</footer>
 </body>
 </html>
