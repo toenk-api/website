@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TOENK API — 全球 AI 基础设施平台 | DeepSeek 专精</title>
+<meta name="description" content="一个 API 接入 50+ AI 模型。DeepSeek、GPT、Claude、Gemini、通义千问、GLM。全球低延迟。智能路由节省 40-60% 成本。免费开始。">
+<meta property="og:title" content="TOENK API — 连接中国 AI 与全球开发者"><meta property="og:description" content="50+ 模型。一个 API。全球触达。">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1a1a25;--border:#1e1e2e;--text:#e2e2f0;--text-dim:#8888a0;--accent:#6c5ce7;--accent-gl:rgba(108,92,231,.15);--green:#00d2a0;--red:#ff6b6b;--orange:#ffa94d;--blue:#4dabf7;--radius:12px;--radius-sm:8px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,15,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:100}
+nav .inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+nav .logo{font-size:1.2em;font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px}
+nav .logo span{color:var(--accent)}
+nav .links{display:flex;gap:24px;align-items:center}
+nav .links a{color:var(--text-dim);text-decoration:none;font-size:.88em;transition:color .2s}
+nav .links a:hover{color:var(--text)}
+nav .actions{display:flex;gap:10px;align-items:center}
+.btn{padding:10px 22px;border-radius:var(--radius-sm);font-size:.875em;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .2s;cursor:pointer;border:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:#7c6ff0;transform:translateY(-1px);box-shadow:0 4px 20px rgba(108,92,231,.35)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--accent)}
+.btn-green{background:var(--green);color:#0a0a0f}.btn-green:hover{background:#00e6b0}
+.btn-lg{padding:14px 32px;font-size:1em;border-radius:12px}
+
+section{padding:80px 24px}
+.inner{max-width:1100px;margin:0 auto}
+
+.hero{padding-top:160px;padding-bottom:100px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(108,92,231,.15),transparent 70%);pointer-events:none}
+.hero h1{font-size:2.8em;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:20px;position:relative}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),#a78bfa,#4dabf7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{color:var(--text-dim);font-size:1.15em;max-width:600px;margin:0 auto 36px;position:relative}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+.hero-stats{display:flex;gap:40px;justify-content:center;margin-top:48px;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat-num{font-size:1.8em;font-weight:800;color:var(--accent)}
+.hero-stat-label{font-size:.82em;color:var(--text-dim)}
+
+.section-title{text-align:center;margin-bottom:40px}
+.section-title h2{font-size:2em;font-weight:800;letter-spacing:-.02em}
+.section-title h2 span{color:var(--accent)}
+.section-title p{color:var(--text-dim);max-width:550px;margin:8px auto 0}
+
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .2s}
+.feat-card:hover{border-color:var(--accent)}
+.feat-card .icon{font-size:1.6em;margin-bottom:12px}
+.feat-card h3{font-size:1.1em;margin-bottom:8px}
+.feat-card p{color:var(--text-dim);font-size:.88em}
+
+.model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.model-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:all .2s;text-decoration:none;color:var(--text);display:block}
+.model-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.model-card .icon{font-size:1.8em;margin-bottom:8px}
+.model-card .name{font-weight:600;font-size:.95em}
+.model-card .prov{font-size:.78em;color:var(--text-dim)}
+.model-card .tag{display:inline-block;margin-top:8px;padding:2px 8px;border-radius:4px;font-size:.7em;background:var(--accent-gl);color:var(--accent)}
+
+.code-block{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;overflow-x:auto;margin:20px 0;font-family:'SF Mono','Fira Code',monospace;font-size:.85em}
+.code-block .c1{color:var(--text-dim)}.code-block .c2{color:var(--green)}.code-block .c3{color:var(--accent)}.code-block .c4{color:var(--orange)}
+
+.compare-table{width:100%;border-collapse:collapse;font-size:.88em;margin:20px 0}
+.compare-table th{text-align:left;padding:12px 16px;border-bottom:2px solid var(--border);font-size:.8em;text-transform:uppercase;color:var(--text-dim)}
+.compare-table th.hl{color:var(--accent)}
+.compare-table td{padding:12px 16px;border-bottom:1px solid var(--border);font-size:.88em}
+
+.metric-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:40px 0}
+.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center}
+.metric-num{font-size:2.2em;font-weight:800;color:var(--accent)}
+.metric-label{font-size:.85em;color:var(--text-dim);margin-top:4px}
+
+.cta-banner{background:linear-gradient(135deg,var(--accent),#a78bfa);border-radius:var(--radius);padding:48px;text-align:center;margin:60px 0;color:#fff}
+.cta-banner h3{font-size:1.8em;margin-bottom:8px}
+.cta-banner p{opacity:.9;margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-banner .btn{background:#fff;color:var(--accent)}.cta-banner .btn:hover{background:#f0f0ff}
+
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:.82em}
+footer a{color:var(--accent);text-decoration:none}
+.lang-switch{font-size:.82em;color:var(--text-dim);text-decoration:none;margin-left:12px}
+
+@media(max-width:768px){
+  .hero h1{font-size:1.8em}
+  .hero{padding-top:120px;padding-bottom:60px}
+  section{padding:48px 16px}
+  .hero-stats{gap:20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="inner">
+<a href="/zh/" class="logo">TOENK<span>API</span><span style="font-size:.65em;color:var(--text-dim);margin-left:4px">™</span></a>
+<div class="links">
+<a href="/zh/models/">模型</a><a href="/zh/pricing/">定价</a><a href="/zh/docs/">文档</a><a href="/zh/playground/">体验</a><a href="/zh/enterprise/">企业</a>
+</div>
+<div class="actions">
+<a href="http://43.164.128.112:3000/" class="btn btn-outline" target="_blank">控制台</a>
+<a href="https://toenk-api.com" class="btn btn-primary" target="_blank">免费开始 →</a>
+<a href="/" class="lang-switch">EN</a>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<div class="inner">
+<h1>连接<span>中国 AI</span>与<br>全球开发者的基础设施</h1>
+<p class="hero-sub">50+ 模型。一个 API。零门槛。通过统一端点访问 DeepSeek、GPT、Claude、Gemini、通义千问、GLM — 智能路由节省 40-60% 成本。</p>
+<div class="hero-actions">
+<a href="https://toenk-api.com" class="btn btn-green btn-lg" target="_blank">⚡ 免费开始 — 赠送 $1 额度</a>
+<a href="/zh/playground/" class="btn btn-outline btn-lg">在线体验</a>
+</div>
+<div class="hero-stats">
+<div class="hero-stat"><div class="hero-stat-num">50+</div><div class="hero-stat-label">AI 模型</div></div>
+<div class="hero-stat"><div class="hero-stat-num">&lt;50ms</div><div class="hero-stat-label">全球延迟</div></div>
+<div class="hero-stat"><div class="hero-stat-num">99.9%</div><div class="hero-stat-label">可用性 SLA</div></div>
+<div class="hero-stat"><div class="hero-stat-num">40-60%</div><div class="hero-stat-label">成本节省</div></div>
+</div>
+</div>
+</section>
+
+<section style="padding-top:0">
+<div class="inner">
+<div class="section-title"><h2><span>30 秒</span>快速开始</h2><p>OpenAI 兼容接口。零迁移成本。无需学习新 SDK。</p></div>
+<div class="code-block">
+<span class="c1"># 安装 OpenAI SDK</span><br>
+<span class="c3">pip install openai</span><br><br>
+<span class="c1"># 只需修改 base_url，即可切换到 TOENK</span><br>
+<span class="c2">from</span> openai <span class="c2">import</span> OpenAI<br><br>
+client = OpenAI(<br>
+&nbsp;&nbsp;api_key=<span class="c4">"你的 TOENK API Key"</span>,<br>
+&nbsp;&nbsp;base_url=<span class="c4">"https://toenk-api.com/v1"</span><br>
+)<br><br>
+response = client.chat.completions.create(<br>
+&nbsp;&nbsp;model=<span class="c4">"deepseek-v4-pro"</span>,<br>
+&nbsp;&nbsp;messages=[{<span class="c4">"role"</span>: <span class="c4">"user"</span>, <span class="c4">"content"</span>: <span class="c4">"解释量子计算原理"</span>}]<br>
+)
+</div>
+</div>
+</section>
+
+<section>
+<div class="inner">
+<div class="section-title"><h2>为什么选择 <span>TOENK</span>？</h2><p>我们是中国 AI 生态与全球开发者之间的桥梁。</p></div>
+<div class="feat-grid">
+<div class="feat-card"><div class="icon">🔗</div><h3>一个 API，全模型接入</h3><p>通过一个 OpenAI 兼容接口访问 DeepSeek、GPT、Claude、Gemini、通义千问、GLM、MiniMax 等 50+ 模型。告别多供应商集成的烦恼。</p></div>
+<div class="feat-card"><div class="icon">🧠</div><h3>智能路由降本</h3><p>智能路由器自动为每次请求选择最具性价比的模型。在不牺牲质量的前提下节省 40-60% 的 API 开销。</p></div>
+<div class="feat-card"><div class="icon">🌏</div><h3>全球低延迟部署</h3><p>首尔 + 新加坡双节点，亚太区延迟低于 50ms。针对亚洲、欧洲、美洲全面优化。</p></div>
+<div class="feat-card"><div class="icon">🇨🇳</div><h3>中国模型无门槛访问</h3><p>DeepSeek、通义千问、GLM、Yi — 无需中国手机号验证，全球开发者可直接使用中国顶级 AI 模型。</p></div>
+<div class="feat-card"><div class="icon">🔒</div><h3>企业级安全合规</h3><p>GDPR 就绪，不存储提示词，支持私有部署。你的数据始终属于你。</p></div>
+<div class="feat-card"><div class="icon">💰</div><h3>透明定价，按量付费</h3><p>按 Token 计费，无基础费用，无最低消费。团队享批量折扣。免费额度助你上手。</p></div>
+</div>
+</div>
+</section>
+
+<section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="inner">
+<div class="section-title"><h2>50+ 模型。 <span>一个平台。</span></h2><p>从推理到编程，从中文到多语言 — 为每个任务找到最佳模型。</p></div>
+<div class="model-grid">
+<a href="/zh/models/" class="model-card"><div class="icon">🔮</div><div class="name">DeepSeek V4 Pro</div><div class="prov">DeepSeek</div><span class="tag">旗舰推荐</span></a>
+<a href="/zh/models/" class="model-card"><div class="icon">⚡</div><div class="name">DeepSeek V4 Flash</div><div class="prov">DeepSeek</div><span class="tag">最佳性价比</span></a>
+<a href="/zh/models/" class="model-card"><div class="icon">🧩</div><div class="name">DeepSeek-R1</div><div class="prov">DeepSeek</div><span class="tag">深度推理</span></a>
+<a href="/zh/models/" class="model-card"><div class="icon">🌊</div><div class="name">Qwen3-235B</div><div class="prov">阿里巴巴</div></a>
+<a href="/zh/models/" class="model-card"><div class="icon">🌟</div><div class="name">GPT-5</div><div class="prov">OpenAI</div></a>
+<a href="/zh/models/" class="model-card"><div class="icon">🎯</div><div class="name">Claude 4 Sonnet</div><div class="prov">Anthropic</div></a>
+<a href="/zh/models/" class="model-card"><div class="icon">💎</div><div class="name">Gemini 2.5 Pro</div><div class="prov">Google</div></a>
+<a href="/zh/models/" class="model-card"><div class="icon">🔥</div><div class="name">GLM-5</div><div class="prov">智谱</div></a>
+</div>
+<div style="text-align:center;margin-top:24px">
+<a href="/zh/models/" class="btn btn-outline">查看全部 50+ 模型 →</a>
+</div>
+</div>
+</section>
+
+<section>
+<div class="inner">
+<div class="section-title"><h2>TOENK <span>优势对比</span></h2></div>
+<div style="overflow-x:auto">
+<table class="compare-table">
+<thead><tr><th>特性</th><th class="hl">TOENK</th><th>OpenRouter</th><th>直连 API</th></tr></thead>
+<tbody>
+<tr><td>中国 AI 模型</td><td style="color:var(--green);font-weight:600">✓ 全部支持</td><td>部分</td><td>单一厂商</td></tr>
+<tr><td>智能路由节省成本</td><td style="color:var(--green);font-weight:600">✓ 40-60%</td><td style="color:var(--red)">✗</td><td style="color:var(--red)">✗</td></tr>
+<tr><td>无需中国手机号</td><td style="color:var(--green);font-weight:600">✓</td><td>部分需要</td><td style="color:var(--red)">✗</td></tr>
+<tr><td>全球低延迟</td><td style="color:var(--green);font-weight:600">✓ &lt;50ms</td><td>100-300ms</td><td>因厂商而异</td></tr>
+<tr><td>企业 SLA</td><td style="color:var(--green);font-weight:600">✓ 99.95%</td><td>无</td><td>因厂商而异</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="inner">
+<div class="metric-row">
+<div class="metric-card"><div class="metric-num">50+</div><div class="metric-label">AI 模型</div></div>
+<div class="metric-card"><div class="metric-num">21+</div><div class="metric-label">模型供应商</div></div>
+<div class="metric-card"><div class="metric-num">&lt;50ms</div><div class="metric-label">平均延迟</div></div>
+<div class="metric-card"><div class="metric-num">99.9%</div><div class="metric-label">可用性</div></div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="inner">
+<div class="cta-banner">
+<h3>准备好构建未来了吗？</h3>
+<p>30 秒注册，赠送 $1 额度。无需信用卡。立即体验 50+ AI 模型。</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+<a href="https://toenk-api.com" class="btn btn-lg" target="_blank">免费开始 →</a>
+<a href="/zh/docs/" class="btn-ghost-white" style="color:#fff;text-decoration:none;padding:10px 22px;border-radius:8px;font-weight:500">查看文档</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 TOENK API. 版权所有 | <a href="/zh/about/">关于</a> | <a href="/zh/pricing/">定价</a> | <a href="/zh/docs/">文档</a> | <a href="/zh/contact/">联系</a> | <a href="/">English</a></p>
+</footer>
+</body>
+</html>
